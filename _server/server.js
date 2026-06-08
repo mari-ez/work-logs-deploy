@@ -41,7 +41,7 @@ const CATEGORIES = [
     id: 'weekly',
     label: '주간보고',
     dir: path.join(OBSIDIAN_BASE, '01_01_주간회의(에너지노)'),
-    filter: name => name.endsWith('.md')
+    filter: name => name.endsWith('.md') && (/주간보고|주간업무보고|팀메모/.test(name))
   },
   {
     id: 'retro',
