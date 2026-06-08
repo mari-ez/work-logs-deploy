@@ -1,0 +1,4 @@
+_server/
+manifest.json
+config.json
+.gitignore

@@ -1,0 +1,4 @@
+_server/node_modules/
+manifest.json
+config.json
+.vercel

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>업무 기록 배포 관리 — 에너지노</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans KR', -apple-system, sans-serif; background: #f3f4f6; color: #111827; font-size: 14px; }
+
+    /* ── Header ── */
+    .header {
+      background: #1e3a5f;
+      color: #fff;
+      padding: 28px 0 24px;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    }
+    .header .inner { max-width: 1000px; margin: 0 auto; padding: 0 28px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .header h1 { font-size: 18px; font-weight: 700; flex: 1; }
+    .header .meta { font-size: 12px; color: #93c5fd; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 16px; border-radius: 7px; font-size: 13px; font-weight: 600;
+      border: none; cursor: pointer; font-family: inherit; transition: opacity .15s, background .15s;
+    }
+    .btn:disabled { opacity: .4; cursor: not-allowed; }
+    .btn-primary { background: #2563eb; color: #fff; }
+    .btn-primary:hover:not(:disabled) { background: #1d4ed8; }
+    .btn-success { background: #16a34a; color: #fff; }
+    .btn-success:hover:not(:disabled) { background: #15803d; }
+    .btn-ghost { background: rgba(255,255,255,.12); color: #fff; }
+    .btn-ghost:hover:not(:disabled) { background: rgba(255,255,255,.2); }
+
+    /* ── Toast ── */
+    #toast {
+      position: fixed; bottom: 24px; right: 24px; z-index: 999;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .toast-item {
+      background: #1f2937; color: #fff; padding: 12px 16px; border-radius: 8px;
+      font-size: 13px; max-width: 360px; box-shadow: 0 4px 12px rgba(0,0,0,.3);
+      animation: slideIn .2s ease;
+    }
+    .toast-item.ok { border-left: 3px solid #16a34a; }
+    .toast-item.err { border-left: 3px solid #dc2626; }
+    @keyframes slideIn { from { transform: translateX(20px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+    /* ── Main ── */
+    .main { max-width: 1000px; margin: 28px auto; padding: 0 28px 80px; }
+
+    /* ── Category block ── */
+    .category { margin-bottom: 32px; }
+    .category-header {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 10px; padding-bottom: 8px;
+      border-bottom: 2px solid #e5e7eb;
+    }
+    .category-title { font-size: 16px; font-weight: 700; color: #1e3a5f; }
+    .category-count { font-size: 12px; color: #6b7280; background: #f3f4f6; padding: 2px 8px; border-radius: 20px; }
+
+    /* ── Folder ── */
+    .folder { margin-bottom: 8px; }
+    .folder-label {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: .06em;
+      padding: 6px 10px; cursor: pointer; user-select: none; border-radius: 6px;
+    }
+    .folder-label:hover { background: #e5e7eb; }
+    .folder-toggle { font-size: 10px; color: #9ca3af; transition: transform .15s; }
+    .folder-toggle.open { transform: rotate(90deg); }
+    .folder-files { padding-left: 8px; }
+
+    /* ── File row ── */
+    .file-row {
+      display: flex; align-items: center; gap: 10px;
+      background: #fff; border: 1px solid #e5e7eb; border-radius: 8px;
+      padding: 10px 14px; margin-bottom: 6px;
+      transition: border-color .15s;
+    }
+    .file-row:hover { border-color: #cbd5e1; }
+    .file-row.deploying { opacity: .6; }
+
+    .file-name { font-weight: 500; color: #111827; flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .file-dates { font-size: 11px; color: #9ca3af; white-space: nowrap; }
+    .file-dates span { display: block; }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 20px; white-space: nowrap;
+    }
+    .badge-new { background: #f3f4f6; color: #6b7280; }
+    .badge-deployed { background: #dcfce7; color: #15803d; }
+    .badge-updated { background: #fef3c7; color: #b45309; }
+
+    .file-actions { display: flex; gap: 6px; flex-shrink: 0; }
+    .btn-sm { padding: 5px 11px; font-size: 12px; font-weight: 600; border-radius: 6px; border: none; cursor: pointer; font-family: inherit; transition: background .15s; }
+    .btn-sm:disabled { opacity: .4; cursor: not-allowed; }
+    .btn-view { background: #eff6ff; color: #2563eb; }
+    .btn-view:hover:not(:disabled) { background: #dbeafe; }
+    .btn-deploy { background: #2563eb; color: #fff; }
+    .btn-deploy:hover:not(:disabled) { background: #1d4ed8; }
+    .btn-redeploy { background: #f3f4f6; color: #374151; }
+    .btn-redeploy:hover:not(:disabled) { background: #e5e7eb; }
+
+    /* ── Empty state ── */
+    .empty { padding: 20px; color: #9ca3af; font-size: 13px; text-align: center; }
+
+    /* ── Vercel URL config ── */
+    .url-bar {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+      background: rgba(255,255,255,.1); border-radius: 6px; padding: 6px 12px;
+    }
+    .url-bar label { font-size: 12px; color: #93c5fd; white-space: nowrap; }
+    .url-bar input {
+      background: transparent; border: none; color: #fff; font-size: 12px; font-family: monospace;
+      min-width: 280px; outline: none; flex: 1;
+    }
+    .url-bar input::placeholder { color: rgba(255,255,255,.3); }
+
+    /* ── Loading spinner ── */
+    .spin { display: inline-block; width: 12px; height: 12px; border: 2px solid currentColor; border-top-color: transparent; border-radius: 50%; animation: spin .6s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Summary bar ── */
+    .summary-bar {
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+      background: #fff; border: 1px solid #e5e7eb; border-radius: 10px;
+      padding: 14px 18px; margin-bottom: 24px;
+    }
+    .summary-item { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+    .summary-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .dot-new { background: #9ca3af; }
+    .dot-deployed { background: #16a34a; }
+    .dot-updated { background: #f59e0b; }
+    .summary-num { font-weight: 700; }
+    .summary-sep { width: 1px; height: 18px; background: #e5e7eb; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="inner">
+    <div style="flex:1">
+      <h1>업무 기록 배포 관리</h1>
+      <div class="meta" id="lastRefresh">로딩 중...</div>
+    </div>
+    <button class="btn btn-success" id="btnDeployAll" onclick="deployAll()">
+      <span id="deployAllIcon">▲</span> 미배포 전체 배포
+    </button>
+    <button class="btn btn-ghost" onclick="refresh()">↻ 새로고침</button>
+    <a class="btn btn-ghost" id="btnViewSite" href="#" target="_blank">🌐 사이트 보기</a>
+  </div>
+  <div class="inner" style="margin-top:10px">
+    <div class="url-bar" style="flex:1">
+      <label>Vercel URL:</label>
+      <input id="vercelUrlInput" type="text" placeholder="https://your-project.vercel.app" oninput="scheduleUrlSave()">
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="summary-bar" id="summaryBar">
+    <div class="summary-item"><div class="summary-dot dot-new"></div><span class="summary-num" id="cnt-new">-</span> 미배포</div>
+    <div class="summary-sep"></div>
+    <div class="summary-item"><div class="summary-dot dot-updated"></div><span class="summary-num" id="cnt-updated">-</span> 업데이트됨</div>
+    <div class="summary-sep"></div>
+    <div class="summary-item"><div class="summary-dot dot-deployed"></div><span class="summary-num" id="cnt-deployed">-</span> 배포됨</div>
+    <div class="summary-sep"></div>
+    <div class="summary-item" style="color:#6b7280">총 <span class="summary-num" id="cnt-total">-</span> 개 문서</div>
+  </div>
+
+  <div id="fileTree">
+    <div class="empty">파일 목록을 불러오는 중...</div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+let allFiles = [];
+let vercelUrl = '';
+let urlSaveTimer = null;
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+async function init() {
+  const [config] = await Promise.all([
+    fetch('/api/config').then(r => r.json()),
+    refresh()
+  ]);
+  vercelUrl = config.vercelUrl || '';
+  document.getElementById('vercelUrlInput').value = vercelUrl;
+  updateSiteLink();
+}
+
+function scheduleUrlSave() {
+  clearTimeout(urlSaveTimer);
+  urlSaveTimer = setTimeout(saveUrl, 800);
+}
+
+async function saveUrl() {
+  const url = document.getElementById('vercelUrlInput').value.trim();
+  vercelUrl = url;
+  updateSiteLink();
+  await fetch('/api/config', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ vercelUrl: url }) });
+  renderTree(); // re-render to update view links
+}
+
+function updateSiteLink() {
+  const btn = document.getElementById('btnViewSite');
+  if (vercelUrl) {
+    btn.href = vercelUrl + '/logs-list.html';
+    btn.style.opacity = '1';
+  } else {
+    btn.href = '#';
+    btn.style.opacity = '.4';
+  }
+}
+
+// ── Fetch & render ────────────────────────────────────────────────────────────
+async function refresh() {
+  try {
+    allFiles = await fetch('/api/files').then(r => r.json());
+    renderTree();
+    const now = new Date().toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    document.getElementById('lastRefresh').textContent = `마지막 갱신: ${now}`;
+  } catch (e) {
+    document.getElementById('fileTree').innerHTML = `<div class="empty" style="color:#dc2626">서버 연결 실패. node server.js 가 실행 중인지 확인해주세요.</div>`;
+  }
+}
+
+function renderTree() {
+  const CATS = ['daily', 'weekly', 'retro'];
+  const CAT_LABELS = { daily: '일일업무보고', weekly: '주간보고', retro: '회고' };
+
+  let cntNew = 0, cntUpdated = 0, cntDeployed = 0;
+  for (const f of allFiles) {
+    if (f.status === 'new') cntNew++;
+    else if (f.status === 'updated') cntUpdated++;
+    else cntDeployed++;
+  }
+  document.getElementById('cnt-new').textContent = cntNew;
+  document.getElementById('cnt-updated').textContent = cntUpdated;
+  document.getElementById('cnt-deployed').textContent = cntDeployed;
+  document.getElementById('cnt-total').textContent = allFiles.length;
+
+  const btnAll = document.getElementById('btnDeployAll');
+  const pending = cntNew + cntUpdated;
+  btnAll.disabled = pending === 0;
+  btnAll.querySelector('#deployAllIcon').textContent = '▲';
+
+  let html = '';
+  for (const catId of CATS) {
+    const catFiles = allFiles.filter(f => f.category === catId);
+
+    html += `<div class="category">
+      <div class="category-header">
+        <div class="category-title">${CAT_LABELS[catId]}</div>
+        <div class="category-count">${catFiles.length}개</div>
+      </div>`;
+
+    if (catFiles.length === 0) {
+      html += `<div class="empty">문서 없음</div>`;
+    } else {
+      // Group by folder
+      const folders = {};
+      for (const f of catFiles) {
+        const key = f.folder || '(루트)';
+        if (!folders[key]) folders[key] = [];
+        folders[key].push(f);
+      }
+
+      const folderKeys = Object.keys(folders).sort((a, b) => b.localeCompare(a, 'ko'));
+      for (const folderKey of folderKeys) {
+        const files = folders[folderKey];
+        const folderId = `folder_${catId}_${folderKey.replace(/\W/g, '_')}`;
+
+        if (folderKey !== '(루트)') {
+          html += `<div class="folder">
+            <div class="folder-label" onclick="toggleFolder('${folderId}')">
+              <span class="folder-toggle open" id="toggle_${folderId}">▶</span>
+              📁 ${folderKey}
+              <span style="color:#9ca3af;font-weight:400;text-transform:none;letter-spacing:0">${files.length}개</span>
+            </div>
+            <div class="folder-files" id="${folderId}">`;
+        } else {
+          html += `<div class="folder"><div class="folder-files" id="${folderId}">`;
+        }
+
+        for (const f of files) {
+          html += renderFileRow(f);
+        }
+
+        html += `</div></div>`;
+      }
+    }
+
+    html += `</div>`;
+  }
+
+  document.getElementById('fileTree').innerHTML = html;
+}
+
+function renderFileRow(f) {
+  const badgeClass = { new: 'badge-new', deployed: 'badge-deployed', updated: 'badge-updated' }[f.status];
+  const badgeText = { new: '미배포', deployed: '배포됨', updated: '업데이트됨' }[f.status];
+  const badgeDot = { new: '○', deployed: '●', updated: '◑' }[f.status];
+
+  const lastMod = f.lastModified ? fmtDate(f.lastModified) : '-';
+  const deployedAt = f.deployedAt ? `배포: ${fmtDate(f.deployedAt)}` : '';
+
+  const viewHref = (vercelUrl && f.deployedAt)
+    ? `${vercelUrl}/${f.status !== 'new' ? f.htmlPath || ('docs/' + f.slug + '.html') : '#'}`
+    : '#';
+  const viewDisabled = !vercelUrl || f.status === 'new' ? 'disabled' : '';
+
+  const deployBtnClass = f.status === 'deployed' ? 'btn-redeploy' : 'btn-deploy';
+  const deployBtnText = f.status === 'deployed' ? '재배포' : '배포';
+
+  return `<div class="file-row" id="row_${CSS.escape(f.id)}">
+    <div class="file-name" title="${escHtml(f.id)}">${escHtml(f.name)}</div>
+    <div class="file-dates">
+      <span>수정: ${lastMod}</span>
+      ${deployedAt ? `<span style="color:#9ca3af">${deployedAt}</span>` : ''}
+    </div>
+    <span class="badge ${badgeClass}">${badgeDot} ${badgeText}</span>
+    <div class="file-actions">
+      <a href="${escHtml(viewHref)}" target="_blank" class="btn-sm btn-view" ${viewDisabled} onclick="${viewDisabled ? 'return false' : ''}">보기</a>
+      <button class="btn-sm ${deployBtnClass}" onclick="deployFile('${escHtml(f.id)}')" id="deploy_${CSS.escape(f.id)}">${deployBtnText}</button>
+    </div>
+  </div>`;
+}
+
+function fmtDate(iso) {
+  const d = new Date(iso);
+  return `${d.getFullYear().toString().slice(2)}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function toggleFolder(id) {
+  const el = document.getElementById(id);
+  const toggle = document.getElementById('toggle_' + id);
+  const open = el.style.display !== 'none';
+  el.style.display = open ? 'none' : '';
+  toggle.classList.toggle('open', !open);
+}
+
+// ── Deploy ────────────────────────────────────────────────────────────────────
+async function deployFile(id) {
+  const btn = document.getElementById('deploy_' + CSS.escape(id));
+  if (!btn) return;
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span>';
+
+  try {
+    const res = await fetch('/api/deploy', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ids: [id] })
+    });
+    const data = await res.json();
+
+    if (data.vercel?.ok) {
+      if (data.vercel.url) {
+        vercelUrl = data.vercel.url;
+        document.getElementById('vercelUrlInput').value = vercelUrl;
+        updateSiteLink();
+      }
+      showToast(`배포 완료 — ${id.split('/').pop()}`, 'ok');
+    } else {
+      showToast(`배포 실패: ${data.vercel?.error || '알 수 없는 오류'}`, 'err');
+    }
+  } catch (e) {
+    showToast('서버 오류: ' + e.message, 'err');
+  }
+
+  await refresh();
+}
+
+async function deployAll() {
+  const btn = document.getElementById('btnDeployAll');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span> 배포 중...';
+
+  try {
+    const res = await fetch('/api/deploy-all', { method: 'POST' });
+    const data = await res.json();
+
+    if (data.message) {
+      showToast(data.message, 'ok');
+    } else if (data.vercel?.ok) {
+      if (data.vercel.url) {
+        vercelUrl = data.vercel.url;
+        document.getElementById('vercelUrlInput').value = vercelUrl;
+        updateSiteLink();
+      }
+      showToast(`${data.deployed}개 배포 완료${data.failed ? ` (${data.failed}개 실패)` : ''}`, data.failed ? 'err' : 'ok');
+    } else {
+      showToast(`배포 실패: ${data.vercel?.error || '알 수 없는 오류'}`, 'err');
+    }
+  } catch (e) {
+    showToast('서버 오류: ' + e.message, 'err');
+  }
+
+  await refresh();
+}
+
+// ── Toast ─────────────────────────────────────────────────────────────────────
+function showToast(msg, type = 'ok') {
+  const container = document.getElementById('toast');
+  const el = document.createElement('div');
+  el.className = `toast-item ${type}`;
+  el.textContent = msg;
+  container.appendChild(el);
+  setTimeout(() => el.remove(), 4000);
+}
+
+init();
+</script>
+</body>
+</html>

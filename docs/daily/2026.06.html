@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026.06 — 에너지노 업무기록</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:#f9fafb;color:#111827;line-height:1.7;font-size:15px}
+    .hdr{background:#1e3a5f;color:#fff;padding:24px 0 20px}
+    .hdr .inner{max-width:1120px;margin:0 auto;padding:0 28px}
+    .hdr a{color:#93c5fd;font-size:13px;text-decoration:none;display:inline-block;margin-bottom:8px}
+    .hdr a:hover{text-decoration:underline}
+    .hdr h1{font-size:20px;font-weight:700;line-height:1.3}
+    /* Two-column layout */
+    .page-wrap{display:flex;align-items:flex-start;max-width:1120px;margin:28px auto 80px;padding:0 28px;gap:24px}
+    /* TOC sidebar */
+    .toc-aside{width:190px;flex-shrink:0;position:sticky;top:24px;max-height:calc(100vh - 48px);overflow-y:auto;scrollbar-width:thin;scrollbar-color:#d1d5db transparent}
+    .toc-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#9ca3af;padding:0 8px;margin-bottom:8px}
+    .toc-nav{display:flex;flex-direction:column;gap:1px}
+    .toc-link{display:block;font-size:12.5px;color:#6b7280;text-decoration:none;padding:5px 8px;border-radius:5px;line-height:1.45;border-left:2px solid transparent;transition:all .12s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .toc-link:hover{background:#f3f4f6;color:#111827;border-left-color:#d1d5db}
+    .toc-link.active{color:#2563eb;border-left-color:#2563eb;background:#eff6ff}
+    /* Doc content */
+    .doc-main{flex:1;min-width:0;background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:40px 44px}
+    h1,h2,h3,h4{font-weight:700;margin:1.5em 0 .5em;line-height:1.3}
+    h1{font-size:22px;border-bottom:2px solid #e5e7eb;padding-bottom:12px;margin-top:0}
+    h2{font-size:17px}h3{font-size:15px}h4{font-size:14px;color:#374151}
+    /* Anchor offset for sticky nav clearance */
+    h2[id],h3[id],h4[id]{scroll-margin-top:80px}
+    p{margin:.7em 0}
+    ul,ol{padding-left:20px;margin:.5em 0}li{margin:.25em 0}
+    table{border-collapse:collapse;width:100%;margin:1em 0;font-size:14px}
+    th,td{border:1px solid #e5e7eb;padding:8px 12px;text-align:left}
+    th{background:#f9fafb;font-weight:600}
+    code{background:#f3f4f6;padding:2px 6px;border-radius:4px;font-size:.88em;font-family:monospace}
+    pre{background:#f3f4f6;padding:16px;border-radius:8px;overflow-x:auto;margin:1em 0}pre code{background:none;padding:0}
+    strong{font-weight:700}
+    hr{border:none;border-top:1px solid #e5e7eb;margin:24px 0}
+    blockquote{border-left:3px solid #d1d5db;padding-left:16px;color:#6b7280;margin:1em 0}
+    a{color:#2563eb}
+    @media(max-width:768px){.page-wrap{flex-direction:column}.toc-aside{width:100%;position:static;max-height:none}}
+  </style>
+</head>
+<body>
+  <div class="hdr">
+    <div class="inner">
+      <a href="/logs-list.html">← 목록으로</a>
+      <h1>2026.06</h1>
+    </div>
+  </div>
+  <div class="page-wrap">
+    <aside class="toc-aside">
+  <div class="toc-label">목차</div>
+  <nav class="toc-nav"><a href="#2026-06-05" class="toc-link lv3" style="padding-left:8px">2026-06-05</a><a href="#2026-06-04" class="toc-link lv3" style="padding-left:8px">2026-06-04</a><a href="#2026-06-02" class="toc-link lv3" style="padding-left:8px">2026-06-02</a><a href="#2026-06-01" class="toc-link lv3" style="padding-left:8px">2026-06-01</a></nav>
+</aside>
+    <main class="doc-main"><h3 id="2026-06-05">2026-06-05</h3>
+<p><strong>[팀공유]</strong>
+일일보고 (김혜진) - 2026. 6. 5. (금)</p>
+<ol>
+<li>농협 상품 설명회 : 10:00-10:40</li>
+<li>주간개발회의 : 13:00-15:40<ol>
+<li>Case5-2 (주소검색+사무실) : 창면적비 화면 내 문구 수정</li>
+<li>건물유형 공공건축물 선택지 추가 (민간 먼저 완료 후 이어서 진행 예정)</li>
+<li>정비사업 공공/민간 구분: 기존 정책 기준으로 DB 채워서 개발팀 전달하기로 함</li>
+<li>Case2 (정비사업+아파트+정보없음) 플로우 수정: Case1 기반으로 변형, 2단계에서 에너빌드 분석 제안 정보 제공 + AI 렌더링</li>
+<li>Case5-3 (주소+데이터센터) 플로우 추가 확정: IT 전력규모 입력 단계 추가, 인허가 기간 안내, 의뢰 케이스로 진행, 연료전지 Alt 유리</li>
+</ol>
+</li>
+<li>정비사업 공공/민간 구분 DB 작업(ing) : <a href="https://works.do/5pUGOFM">https://works.do/5pUGOFM</a></li>
+<li>디벨로퍼<ol>
+<li>Case5-2 (주소검색+사무실) : <a href="https://works.do/5SFggtS">https://works.do/5SFggtS</a><ol>
+<li>SB 수정, 디스크립션 작성 및 개발요청</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>기획문서 업데이트: service_flow_case_overview.md, public_private_project_classification_policy.md</li>
+<li>이후 업무<ol>
+<li>에너빌드 디벨로퍼<ol>
+<li>Case2 상세 화면기획: 2단계 에너빌드 분석 제안 정보 항목 정의 (용적률·건폐율·세대 구성 등)</li>
+<li>Case5-1 아파트 화면기획 : 정비사업이 아닌 아파트 케이스</li>
+<li>Case5-3 데이터센터 화면기획<ol>
+<li>IT 전력규모 입력 UX 설계, 인허가 기간 안내 문구 정의</li>
+<li>Case5-3 연료전지 Alt 포함 여부 및 제안 조건 구체화 (박사님)</li>
+<li>분석단계 콘텐츠 기획 — 시뮬레이션, 보고서</li>
+</ol>
+</li>
+<li>화면설계 작성 (시뮬레이션 단계까지, ing)</li>
+</ol>
+</li>
+<li>GNB tobe 개발요건 정의 및 화면설계<ol>
+<li>에너지절약계획서 메뉴에 신과장님, 박사님 작업 중인 도구 제공하기</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>백로그 (7월~)<ol>
+<li>6월 말 오픈 후 재개발닷컴 기반 데이터 보강 계획 수립</li>
+<li>공공건축물 flow 기획 (민간 완료 후)</li>
+</ol>
+</li>
+</ol>
+<p><strong>[작업기록]</strong>
+일일보고 (김혜진) - 2026. 6. 5. (금)</p>
+<ol>
+<li>정비사업 DB 시도별 시트 분리 Apps Script 작성<ol>
+<li>대상 파일: <code>jeongbi_projectType</code> 스프레드시트<ol>
+<li>구성: id, record_code, title, latitude, longitude, ... 시도, 시군구 컬럼 포함</li>
+<li>원본 데이터 첫 번째 시트에 전국 데이터 통합</li>
+</ol>
+</li>
+<li>기존 코드 유지<ol>
+<li><code>testKakaoAPI()</code> — Kakao Local API 연결 테스트</li>
+<li><code>addRegionColumnsResume()</code> — 위경도 기반 시도/시군구 컬럼 채우기 (재개 가능)</li>
+</ol>
+</li>
+<li>신규 함수 추가<ol>
+<li><code>splitSheetByRegion()</code> — 시도 컬럼 기준으로 시도별 새 시트 생성 및 데이터 복사</li>
+<li><code>resetSplitProgress()</code> — 진행 상태 초기화 (처음부터 재실행 시 사용)</li>
+</ol>
+</li>
+<li>재개 가능 구조<ol>
+<li><code>PropertiesService</code>의 <code>SPLIT_LAST_ROW</code> 키로 마지막 처리 행 번호 저장</li>
+<li>세션 종료 후 재실행 시 저장된 행 번호 다음 행부터 이어서 처리</li>
+<li>배치 사이즈 200행 / 최대 실행 시간 4.5분 (Apps Script 6분 제한 고려)</li>
+</ol>
+</li>
+<li>결과 구조: 원본 시트 유지 + 시도별 새 시트 추가 (헤더 + 해당 시도 데이터)</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="2026-06-04">2026-06-04</h3>
+<p><strong>[팀공유]</strong>
+일일보고 (김혜진) - 2026. 6. 4. (목)</p>
+<ol>
+<li>디벨로퍼 Case5-2 화면기획 진행 : <a href="https://works.do/5SFggtS">https://works.do/5SFggtS</a></li>
+<li>오전미팅 w/정두식대표님 : 10:40-11:10</li>
+<li>에너빌드 디자인 시스템 — Chip 태그 컴포넌트 개편<ol>
+<li>Chip v2 컴포넌트 세트 생성 완료 : 사이즈 3종 / 스타일 2종 / 색상 10종 (총 60 variant)</li>
+</ol>
+</li>
+<li>정비사업 공공/민간 구분 데이터 작업 : <a href="https://works.do/G9hAelp">https://works.do/G9hAelp</a><ol>
+<li>각 정비사업의 공공·민간 여부 DB 수기 입력하여 서비스 제공하기로 결정</li>
+<li>정비사업 목록 수급 완료, 지역값(시도·시군구) 컬럼 추가 작업 진행 중</li>
+<li>서울·경기·부산 대상으로 선 진행 예정 (6/5~)</li>
+</ol>
+</li>
+<li>이후 업무<ol>
+<li>에너빌드 디벨로퍼<ol>
+<li>분석단계 콘텐츠 기획 -시뮬레이션, 보고서 : alt 확정 및 보고서내용 초안(구성할 내용) 필요</li>
+<li>화면설계 작성 (시뮬레이션 단계까지, 5/27(수)~6/5 예상, ing)<ol>
+<li>이후 나머지 진행(기획)</li>
+<li>alt 구성 정의에 따른 시뮬레이션 요건 정의 및 화면설계 보강 작성 (~6/5 예상) <ol>
+<li>★디자인 작업 진행 필요 : 건물+설비 인포그래픽에 사용할 디자인 요소 외</li>
+</ol>
+</li>
+<li>GNB tobe 개발요건 정의 및 화면설계</li>
+</ol>
+</li>
+<li>학교, 공장 샘플 flow</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p><strong>[작업기록]</strong>
+일일보고 (김혜진) - 2026. 6. 4. (목)</p>
+<ol>
+<li>에너빌드 디자인 시스템 — Chip 태그 컴포넌트 개편<ol>
+<li>기존 Chip 컴포넌트 분석 (Figma node 184:61)<ol>
+<li>폰트: Inter Semi Bold, 단일 사이즈, 연한 배경 스타일만 존재</li>
+</ol>
+</li>
+<li>수정 요건 확정<ol>
+<li>폰트: Noto Sans KR Medium (500)</li>
+<li>사이즈 3종: Small(11px) / Medium(13px) / Large(15px)</li>
+<li>스타일 2종: Light(연한배경+진한글씨) / Solid(진한배경+흰글씨)</li>
+<li>색상 10종: 기존 8가지 유지 + Teal(청록), Indigo 신규 추가</li>
+</ol>
+</li>
+<li>Chip v2 컴포넌트 세트 생성 (같은 페이지 신규 프레임)<ol>
+<li>총 60개 variant (3 × 2 × 10)</li>
+<li>Figma node 509:1409</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>디벨로퍼 Case5-2 화면기획 진행 : <a href="https://works.do/5SFggtS">https://works.do/5SFggtS</a></li>
+<li>정비사업 공공/민간 구분 데이터 작업 : <a href="https://works.do/G9hAelp">https://works.do/G9hAelp</a><ol>
+<li>배경: 각 정비사업의 공공·민간 여부를 DB에 수기 입력하여 서비스에서 제공하기로 결정<ol>
+<li>추후 자동화 방법 탐색 예정, 당장은 시간 부족으로 수기 입력으로 진행</li>
+</ol>
+</li>
+<li>오후에 정비사업 목록 수급 (엑셀파일)</li>
+<li>스프레드시트 변환 후 Apps Script로 지역값 컬럼 추가 작업 (시도, 시군구)<ol>
+<li>latitude / longitude 기반 역지오코딩 → 시도 / 시군구 2개 컬럼 추가</li>
+<li>Kakao Maps REST API 연동 (coord2regioncode 엔드포인트)<ol>
+<li>카카오 디벨로퍼스 앱 등록 및 REST API 키 발급</li>
+<li>플랫폼 등록 (script.google.com), OPEN_MAP_AND_LOCAL 서비스 활성화</li>
+</ol>
+</li>
+<li>Apps Script 작성 — 25분 자동 중단 및 이어서 처리(resume) 방식으로 구현</li>
+</ol>
+</li>
+<li>서울, 경기, 부산 대상으로 선 진행 예정 (6/5~)</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="2026-06-02">2026-06-02</h3>
+<p>일일보고 (김혜진) - 2026. 6. 2. (화)</p>
+<ol>
+<li>에너빌드 서비스 소개서 업데이트 : <a href="https://works.do/5Cvxcl1">https://works.do/5Cvxcl1</a><ol>
+<li>실무회의 1차 w/박사님, 나리과장님, 심과장님 : 10:00-11:10</li>
+<li>방향성 및 요건 정의 문서 작성 : <a href="https://vercel-spec-deploy.vercel.app/viewer.html?file=enerbuild_intro_content_plan_20260602">https://vercel-spec-deploy.vercel.app/viewer.html?file=enerbuild_intro_content_plan_20260602</a></li>
+<li>상세 내용 초안 작성 : <a href="https://vercel-spec-deploy.vercel.app/viewer.html?file=enerbuild_intro_slides_draft_20260602">https://vercel-spec-deploy.vercel.app/viewer.html?file=enerbuild_intro_slides_draft_20260602</a></li>
+<li>서비스 스크린샷 작업 : <a href="https://works.do/5804J52">https://works.do/5804J52</a></li>
+</ol>
+</li>
+<li>디벨로퍼 <ol>
+<li>Case1 (정비사업+아파트) 개발 f/u</li>
+<li>Case5-2 (주소+업무시설) 화면설계 : <a href="https://works.do/5SFggtS">https://works.do/5SFggtS</a>, ing<ol>
+<li>법규검토단계까지 작성완료</li>
+<li>창면적비 선택 화면부터 이어서 진행해야 함</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>이후 업무<ol>
+<li>에너빌드 디벨로퍼<ol>
+<li>분석단계 콘텐츠 기획 -시뮬레이션, 보고서</li>
+<li>화면설계 작성 (시뮬레이션 단계까지, 5/27(수)~6/5 예상, ing)<ol>
+<li>이후 나머지 진행(기획)</li>
+<li>alt 구성 정의에 따른 시뮬레이션 요건 정의 및 화면설계 보강 작성 (~6/5 예상) <ol>
+<li>★디자인 작업 진행 필요 : 건물+설비 인포그래픽에 사용할 디자인 요소 외</li>
+</ol>
+</li>
+<li>GNB tobe 개발요건 정의 및 화면설계</li>
+</ol>
+</li>
+<li>에너빌드 분석 보고서 생성 단계 기획 (6/8~ 예상)</li>
+<li>학교, 공장 샘플 flow</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="2026-06-01">2026-06-01</h3>
+<p>일일보고 (김혜진) - 2026. 6. 1. (월)</p>
+<ol>
+<li>에너빌드 디벨로퍼 분석 단계 콘텐츠 대표님 아이디어 청취 : 09:10-09:30<ol>
+<li><a href="https://works.do/GcBiiQi">https://works.do/GcBiiQi</a></li>
+</ol>
+</li>
+<li>주간회의 : 09:30-10:30</li>
+<li>디벨로퍼 Case1 (정비사업+아파트) <ol>
+<li>화면설계 수정 및 개발 전달 : <a href="https://works.do/G18UJQ0">https://works.do/G18UJQ0</a></li>
+<li>재개발닷컴 데이터 벤치마킹 : <a href="https://works.do/xnPEERP">https://works.do/xnPEERP</a><ol>
+<li>데이터 출처 조사 1차</li>
+<li>추가조사 필요 및 데이터 형태 확인 후 제공정책 정의 필요</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>디벨로퍼 Case5-2 (주소+업무시설) 화면설계 : <a href="https://works.do/5SFggtS">https://works.do/5SFggtS</a></li>
+<li>이후 업무<ol>
+<li>에너빌드 디벨로퍼<ol>
+<li>분석단계 콘텐츠 기획</li>
+<li>화면설계 작성 (시뮬레이션 단계까지, 5/27(수)~6/5 예상, ing)<ol>
+<li>이후 나머지 진행(기획)</li>
+<li>alt 구성 정의에 따른 시뮬레이션 요건 정의 및 화면설계 보강 작성 (~6/5 예상) <ol>
+<li>★디자인 작업 진행 필요 : 건물+설비 인포그래픽에 사용할 디자인 요소 외</li>
+</ol>
+</li>
+<li>GNB tobe 개발요건 정의 및 화면설계</li>
+</ol>
+</li>
+<li>~6/4(목) 에너빌드 소개서 업데이트 F/U<ol>
+<li>이지스 자산운용 등 외부 미팅에서 사용하실 수 있게 준비</li>
+<li>6/2(화) 13:00 실무자 미팅 w/박사님, 나리과장님, 심과장님</li>
+</ol>
+</li>
+<li>에너빌드 분석 보고서 생성 단계 기획 (6/8~ 예상)</li>
+<li>학교, 공장 샘플 flow : 영진약품 자료 수급 완료(6/1 월, 전이사님)</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</main>
+  </div>
+  <script>
+(function(){
+  const links = document.querySelectorAll('.toc-link');
+  const headings = Array.from(document.querySelectorAll('h2[id],h3[id],h4[id]'));
+  if (!headings.length) return;
+  function update() {
+    const y = window.scrollY + 100;
+    let cur = headings[0];
+    for (const h of headings) { if (h.offsetTop <= y) cur = h; }
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur.id));
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+</script>
+</body>
+</html>

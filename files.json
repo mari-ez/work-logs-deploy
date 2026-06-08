@@ -1,0 +1,456 @@
+[
+    {
+        "id": "weekly/2026.06_팀메모.md",
+        "slug": "weekly/2026.06_팀메모",
+        "category": "weekly",
+        "categoryLabel": "주간보고",
+        "name": "2026.06_팀메모",
+        "folder": "",
+        "lastModified": "2026-06-08T00:00:00.000Z",
+        "deployedAt": "2026-06-08T00:00:00.000Z",
+        "htmlPath": "docs/weekly/2026.06_팀메모.html",
+        "sections": [
+            {
+                "id": "2026-06-2주차-6-8-6-12",
+                "text": "2026-06-2주차 (6/8~6/12)"
+            }
+        ]
+    },
+    {
+        "id": "daily/2026.06.md",
+        "slug": "daily/2026.06",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026.06",
+        "folder": "",
+        "lastModified": "2026-06-05T11:39:04.202Z",
+        "deployedAt": "2026-06-05T11:40:15.759Z",
+        "htmlPath": "docs/daily/2026.06.html",
+        "sections": [
+            {
+                "id": "2026-06-05",
+                "text": "2026-06-05"
+            },
+            {
+                "id": "2026-06-04",
+                "text": "2026-06-04"
+            },
+            {
+                "id": "2026-06-02",
+                "text": "2026-06-02"
+            },
+            {
+                "id": "2026-06-01",
+                "text": "2026-06-01"
+            }
+        ]
+    },
+    {
+        "id": "daily/2026.05.md",
+        "slug": "daily/2026.05",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026.05",
+        "folder": "",
+        "lastModified": "2026-06-05T00:04:56.198Z",
+        "deployedAt": "2026-06-05T10:01:56.001Z",
+        "htmlPath": "docs/daily/2026.05.html",
+        "sections": [
+            {
+                "id": "2026-05-29",
+                "text": "2026-05-29"
+            },
+            {
+                "id": "2026-05-28",
+                "text": "2026-05-28"
+            },
+            {
+                "id": "2026-05-27",
+                "text": "2026-05-27"
+            },
+            {
+                "id": "2026-05-26",
+                "text": "2026-05-26"
+            },
+            {
+                "id": "2026-05-22",
+                "text": "2026-05-22"
+            },
+            {
+                "id": "2026-05-21",
+                "text": "2026-05-21"
+            },
+            {
+                "id": "2026-05-20",
+                "text": "2026-05-20"
+            },
+            {
+                "id": "2026-05-19",
+                "text": "2026-05-19"
+            },
+            {
+                "id": "2026-05-18",
+                "text": "2026-05-18"
+            },
+            {
+                "id": "2026-05-15",
+                "text": "2026-05-15"
+            },
+            {
+                "id": "2026-05-14",
+                "text": "2026-05-14"
+            },
+            {
+                "id": "2026-05-13",
+                "text": "2026-05-13"
+            },
+            {
+                "id": "2026-05-12",
+                "text": "2026-05-12"
+            },
+            {
+                "id": "2026-05-11",
+                "text": "2026-05-11"
+            },
+            {
+                "id": "2026-05-08",
+                "text": "2026-05-08"
+            },
+            {
+                "id": "2026-05-07",
+                "text": "2026-05-07"
+            },
+            {
+                "id": "2026-05-06",
+                "text": "2026-05-06"
+            }
+        ]
+    },
+    {
+        "id": "daily/2026-04/2026-04-30.md",
+        "slug": "daily/2026-04__2026-04-30",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026-04-30",
+        "folder": "2026-04",
+        "lastModified": "2026-04-30T06:39:24.707Z",
+        "deployedAt": "2026-06-04T06:08:08.633Z",
+        "htmlPath": "docs/daily/2026-04__2026-04-30.html",
+        "sections": []
+    },
+    {
+        "id": "daily/2026-04/2026-04-29.md",
+        "slug": "daily/2026-04__2026-04-29",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026-04-29",
+        "folder": "2026-04",
+        "lastModified": "2026-04-29T08:32:25.424Z",
+        "deployedAt": "2026-06-04T06:08:08.633Z",
+        "htmlPath": "docs/daily/2026-04__2026-04-29.html",
+        "sections": []
+    },
+    {
+        "id": "daily/2026-04/2026-04-28.md",
+        "slug": "daily/2026-04__2026-04-28",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026-04-28",
+        "folder": "2026-04",
+        "lastModified": "2026-04-28T01:38:20.197Z",
+        "deployedAt": "2026-06-04T06:08:08.634Z",
+        "htmlPath": "docs/daily/2026-04__2026-04-28.html",
+        "sections": []
+    },
+    {
+        "id": "daily/2026-04/2026-04-27.md",
+        "slug": "daily/2026-04__2026-04-27",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026-04-27",
+        "folder": "2026-04",
+        "lastModified": "2026-04-27T08:51:15.947Z",
+        "deployedAt": "2026-06-04T06:08:08.634Z",
+        "htmlPath": "docs/daily/2026-04__2026-04-27.html",
+        "sections": []
+    },
+    {
+        "id": "daily/2026-04/2026-04-24.md",
+        "slug": "daily/2026-04__2026-04-24",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026-04-24",
+        "folder": "2026-04",
+        "lastModified": "2026-04-27T00:17:05.894Z",
+        "deployedAt": "2026-06-04T06:08:08.635Z",
+        "htmlPath": "docs/daily/2026-04__2026-04-24.html",
+        "sections": []
+    },
+    {
+        "id": "daily/2026-04/2026-04-23.md",
+        "slug": "daily/2026-04__2026-04-23",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026-04-23",
+        "folder": "2026-04",
+        "lastModified": "2026-04-23T08:24:01.558Z",
+        "deployedAt": "2026-06-04T06:08:08.635Z",
+        "htmlPath": "docs/daily/2026-04__2026-04-23.html",
+        "sections": []
+    },
+    {
+        "id": "daily/2026-04/2026-04-22.md",
+        "slug": "daily/2026-04__2026-04-22",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026-04-22",
+        "folder": "2026-04",
+        "lastModified": "2026-04-22T08:48:14.298Z",
+        "deployedAt": "2026-06-04T06:08:08.636Z",
+        "htmlPath": "docs/daily/2026-04__2026-04-22.html",
+        "sections": []
+    },
+    {
+        "id": "daily/2026-04/2026-04-21.md",
+        "slug": "daily/2026-04__2026-04-21",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026-04-21",
+        "folder": "2026-04",
+        "lastModified": "2026-04-21T08:32:43.922Z",
+        "deployedAt": "2026-06-04T06:08:08.636Z",
+        "htmlPath": "docs/daily/2026-04__2026-04-21.html",
+        "sections": []
+    },
+    {
+        "id": "daily/2026-04/2026-04-20.md",
+        "slug": "daily/2026-04__2026-04-20",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026-04-20",
+        "folder": "2026-04",
+        "lastModified": "2026-04-20T08:34:13.058Z",
+        "deployedAt": "2026-06-04T06:08:08.636Z",
+        "htmlPath": "docs/daily/2026-04__2026-04-20.html",
+        "sections": []
+    },
+    {
+        "id": "daily/2026-04/2026-04-17.md",
+        "slug": "daily/2026-04__2026-04-17",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026-04-17",
+        "folder": "2026-04",
+        "lastModified": "2026-04-17T08:29:57.382Z",
+        "deployedAt": "2026-06-04T06:08:08.637Z",
+        "htmlPath": "docs/daily/2026-04__2026-04-17.html",
+        "sections": []
+    },
+    {
+        "id": "daily/2026-04/2026-04-16.md",
+        "slug": "daily/2026-04__2026-04-16",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026-04-16",
+        "folder": "2026-04",
+        "lastModified": "2026-04-16T08:54:25.448Z",
+        "deployedAt": "2026-06-04T06:08:08.638Z",
+        "htmlPath": "docs/daily/2026-04__2026-04-16.html",
+        "sections": []
+    },
+    {
+        "id": "daily/2026-04/2026-04-15.md",
+        "slug": "daily/2026-04__2026-04-15",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026-04-15",
+        "folder": "2026-04",
+        "lastModified": "2026-04-15T08:32:14.422Z",
+        "deployedAt": "2026-06-04T06:08:08.638Z",
+        "htmlPath": "docs/daily/2026-04__2026-04-15.html",
+        "sections": []
+    },
+    {
+        "id": "daily/2026-04/2026-04-14.md",
+        "slug": "daily/2026-04__2026-04-14",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026-04-14",
+        "folder": "2026-04",
+        "lastModified": "2026-04-14T08:26:04.712Z",
+        "deployedAt": "2026-06-04T06:08:08.639Z",
+        "htmlPath": "docs/daily/2026-04__2026-04-14.html",
+        "sections": []
+    },
+    {
+        "id": "daily/2026-04/2026-04-13.md",
+        "slug": "daily/2026-04__2026-04-13",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026-04-13",
+        "folder": "2026-04",
+        "lastModified": "2026-04-13T08:18:38.216Z",
+        "deployedAt": "2026-06-04T06:08:08.639Z",
+        "htmlPath": "docs/daily/2026-04__2026-04-13.html",
+        "sections": []
+    },
+    {
+        "id": "daily/2026-04/2026-04-10.md",
+        "slug": "daily/2026-04__2026-04-10",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026-04-10",
+        "folder": "2026-04",
+        "lastModified": "2026-04-10T10:58:03.536Z",
+        "deployedAt": "2026-06-04T06:08:08.639Z",
+        "htmlPath": "docs/daily/2026-04__2026-04-10.html",
+        "sections": []
+    },
+    {
+        "id": "daily/2026-04/2026-04-09.md",
+        "slug": "daily/2026-04__2026-04-09",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026-04-09",
+        "folder": "2026-04",
+        "lastModified": "2026-04-09T08:21:51.315Z",
+        "deployedAt": "2026-06-04T06:08:08.640Z",
+        "htmlPath": "docs/daily/2026-04__2026-04-09.html",
+        "sections": []
+    },
+    {
+        "id": "daily/2026-04/2026-04-08.md",
+        "slug": "daily/2026-04__2026-04-08",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026-04-08",
+        "folder": "2026-04",
+        "lastModified": "2026-04-08T07:22:24.416Z",
+        "deployedAt": "2026-06-04T06:08:08.640Z",
+        "htmlPath": "docs/daily/2026-04__2026-04-08.html",
+        "sections": []
+    },
+    {
+        "id": "daily/2026-04/2026-04-07.md",
+        "slug": "daily/2026-04__2026-04-07",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026-04-07",
+        "folder": "2026-04",
+        "lastModified": "2026-04-07T08:24:08.689Z",
+        "deployedAt": "2026-06-04T06:08:08.641Z",
+        "htmlPath": "docs/daily/2026-04__2026-04-07.html",
+        "sections": []
+    },
+    {
+        "id": "daily/2026-04/2026-04-06.md",
+        "slug": "daily/2026-04__2026-04-06",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026-04-06",
+        "folder": "2026-04",
+        "lastModified": "2026-04-06T08:30:52.235Z",
+        "deployedAt": "2026-06-04T06:08:08.641Z",
+        "htmlPath": "docs/daily/2026-04__2026-04-06.html",
+        "sections": []
+    },
+    {
+        "id": "daily/2026-04/2026-04-03.md",
+        "slug": "daily/2026-04__2026-04-03",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026-04-03",
+        "folder": "2026-04",
+        "lastModified": "2026-04-03T08:12:59.483Z",
+        "deployedAt": "2026-06-04T06:08:08.642Z",
+        "htmlPath": "docs/daily/2026-04__2026-04-03.html",
+        "sections": []
+    },
+    {
+        "id": "daily/2026-04/2026-04-02.md",
+        "slug": "daily/2026-04__2026-04-02",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026-04-02",
+        "folder": "2026-04",
+        "lastModified": "2026-04-02T08:28:24.685Z",
+        "deployedAt": "2026-06-04T06:08:08.642Z",
+        "htmlPath": "docs/daily/2026-04__2026-04-02.html",
+        "sections": []
+    },
+    {
+        "id": "daily/2026-04/2026-04-01.md",
+        "slug": "daily/2026-04__2026-04-01",
+        "category": "daily",
+        "categoryLabel": "일일업무보고",
+        "name": "2026-04-01",
+        "folder": "2026-04",
+        "lastModified": "2026-04-02T00:23:57.731Z",
+        "deployedAt": "2026-06-04T06:08:08.643Z",
+        "htmlPath": "docs/daily/2026-04__2026-04-01.html",
+        "sections": []
+    },
+    {
+        "id": "weekly/2026.06_주간보고.md",
+        "slug": "weekly/2026.06_주간보고",
+        "category": "weekly",
+        "categoryLabel": "주간보고",
+        "name": "2026.06_주간보고",
+        "folder": "",
+        "lastModified": "2026-06-05T10:28:52.848Z",
+        "deployedAt": "2026-06-05T10:29:03.302Z",
+        "htmlPath": "docs/weekly/2026.06_주간보고.html",
+        "sections": [
+            {
+                "id": "2026-06-1주차-6-1-6-5",
+                "text": "2026-06-1주차 (6/1~6/5)"
+            }
+        ]
+    },
+    {
+        "id": "weekly/2026.05_주간보고.md",
+        "slug": "weekly/2026.05_주간보고",
+        "category": "weekly",
+        "categoryLabel": "주간보고",
+        "name": "2026.05_주간보고",
+        "folder": "",
+        "lastModified": "2026-06-04T05:25:03.485Z",
+        "deployedAt": "2026-06-04T06:08:08.644Z",
+        "htmlPath": "docs/weekly/2026.05_주간보고.html",
+        "sections": [
+            {
+                "id": "2026-05-4주차-5-25-5-29",
+                "text": "2026-05-4주차 (5/25~5/29)"
+            },
+            {
+                "id": "2026-05-3주차-5-18-5-22",
+                "text": "2026-05-3주차 (5/18~5/22)"
+            },
+            {
+                "id": "2026-05-2주차-5-11-5-15",
+                "text": "2026-05-2주차 (5/11~5/15)"
+            },
+            {
+                "id": "2026-05-1주차-5-4-5-8",
+                "text": "2026-05-1주차 (5/4~5/8)"
+            }
+        ]
+    },
+    {
+        "id": "retro/2026.05_월간회고.md",
+        "slug": "retro/2026.05_월간회고",
+        "category": "retro",
+        "categoryLabel": "회고",
+        "name": "2026.05_월간회고",
+        "folder": "",
+        "lastModified": "2026-06-04T05:46:20.061Z",
+        "deployedAt": "2026-06-04T06:08:08.645Z",
+        "htmlPath": "docs/retro/2026.05_월간회고.html",
+        "sections": [
+            {
+                "id": "2026-05-월간회고",
+                "text": "2026-05 월간회고"
+            }
+        ]
+    }
+]

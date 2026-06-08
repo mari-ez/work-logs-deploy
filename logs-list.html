@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>에너지노 업무기록</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Sans KR', -apple-system, sans-serif; background: #f9fafb; color: #111827; font-size: 15px; }
+
+    /* ── Header ── */
+    .site-header { background: #1e3a5f; color: #fff; padding: 32px 0 24px; }
+    .site-header .inner { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+    .site-header h1 { font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+    .site-header p { font-size: 13px; color: #93c5fd; }
+
+    /* ── Page layout: sidebar + main ── */
+    .page-wrap { display: flex; align-items: flex-start; max-width: 1200px; margin: 28px auto 80px; padding: 0 28px; gap: 28px; }
+
+    /* ── TOC sidebar ── */
+    .toc-aside {
+      width: 210px; flex-shrink: 0;
+      position: sticky; top: 24px; max-height: calc(100vh - 48px);
+      overflow-y: auto; scrollbar-width: thin; scrollbar-color: #d1d5db transparent;
+    }
+    .toc-cat-label {
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+      color: #9ca3af; padding: 0 8px; margin-bottom: 6px; margin-top: 16px;
+    }
+    .toc-cat-label:first-child { margin-top: 0; }
+    .toc-file-link {
+      display: block; font-size: 13px; font-weight: 600; color: #374151; text-decoration: none;
+      padding: 5px 8px; border-radius: 5px; line-height: 1.4; transition: background .12s;
+    }
+    .toc-file-link:hover { background: #f3f4f6; color: #1e3a5f; }
+    .toc-section-link {
+      display: block; font-size: 12px; color: #6b7280; text-decoration: none;
+      padding: 3px 8px 3px 20px; border-radius: 5px; line-height: 1.4;
+      border-left: 2px solid transparent; transition: all .12s;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .toc-section-link:hover { background: #f3f4f6; color: #111827; }
+    .toc-divider { border: none; border-top: 1px solid #e5e7eb; margin: 10px 0; }
+    .toc-folder-label {
+      font-size: 11px; font-weight: 600; color: #9ca3af; padding: 4px 8px 2px;
+      display: flex; align-items: center; gap: 4px; cursor: pointer; border-radius: 5px;
+      transition: background .12s;
+    }
+    .toc-folder-label:hover { background: #f3f4f6; }
+    .toc-folder-toggle { font-size: 9px; transition: transform .15s; }
+    .toc-folder-toggle.open { transform: rotate(90deg); }
+    .toc-folder-body.collapsed { display: none; }
+
+    /* ── Main content ── */
+    .main-content { flex: 1; min-width: 0; }
+
+    /* ── Tabs ── */
+    .tab-bar {
+      display: flex; gap: 4px; margin-bottom: 24px;
+      border-bottom: 2px solid #e5e7eb;
+    }
+    .tab {
+      padding: 10px 20px; font-size: 14px; font-weight: 600; cursor: pointer;
+      border-radius: 6px 6px 0 0; color: #6b7280; border: none; background: transparent;
+      font-family: inherit; margin-bottom: -2px; border-bottom: 2px solid transparent;
+      transition: color .15s;
+    }
+    .tab.active { color: #1e3a5f; border-bottom-color: #1e3a5f; }
+    .tab:hover:not(.active) { color: #374151; }
+
+    .cat-panel { display: none; }
+    .cat-panel.active { display: block; }
+
+    /* ── Folder section ── */
+    .folder-section { margin-bottom: 28px; }
+    .folder-label {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+      color: #6b7280; padding: 6px 4px; border-radius: 6px;
+      cursor: pointer; user-select: none; transition: background .12s;
+    }
+    .folder-label:hover { background: #f3f4f6; }
+    .folder-toggle { font-size: 10px; color: #9ca3af; transition: transform .2s; }
+    .folder-toggle.open { transform: rotate(90deg); }
+    .folder-body { overflow: hidden; padding-top: 8px; }
+    .folder-body.collapsed { display: none; }
+
+    /* ── Doc list ── */
+    .doc-list { display: flex; flex-direction: column; gap: 6px; }
+    .doc-list-item {
+      display: flex; align-items: center; justify-content: space-between;
+      background: #fff; border: 1px solid #e5e7eb; border-radius: 8px;
+      padding: 12px 16px; text-decoration: none; color: inherit; transition: border-color .15s;
+    }
+    .doc-list-item:hover { border-color: #2563eb; }
+    .doc-list-item-name { font-size: 14px; font-weight: 500; color: #111827; }
+    .doc-list-item-date { font-size: 12px; color: #9ca3af; }
+    .doc-list-arrow { color: #d1d5db; font-size: 12px; }
+
+    /* ── Doc cards ── */
+    .doc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+    .doc-card {
+      display: block; background: #fff; border: 1px solid #e5e7eb; border-radius: 10px;
+      padding: 18px 20px; text-decoration: none; color: inherit; transition: border-color .15s, box-shadow .15s;
+    }
+    .doc-card:hover { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,.07); }
+    .doc-card-title { font-size: 14px; font-weight: 600; color: #111827; line-height: 1.4; margin-bottom: 6px; }
+    .doc-card-meta { font-size: 12px; color: #9ca3af; }
+
+    /* ── Inline section list (below card/list item) ── */
+    .section-list { display: flex; flex-wrap: wrap; gap: 4px; padding: 8px 16px 12px; }
+    .section-chip {
+      display: inline-block; font-size: 12px; color: #4b5563; text-decoration: none;
+      background: #f3f4f6; padding: 3px 10px; border-radius: 20px; border: 1px solid #e5e7eb;
+      transition: background .12s, border-color .12s;
+    }
+    .section-chip:hover { background: #eff6ff; border-color: #2563eb; color: #2563eb; }
+
+    .empty { color: #9ca3af; font-size: 14px; padding: 32px 0; text-align: center; }
+    .loading { color: #9ca3af; font-size: 14px; padding: 60px 0; text-align: center; }
+
+    /* ── Deploy mode ── */
+    .deploy-bar {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+      background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px;
+      padding: 10px 14px; margin-bottom: 20px; font-size: 13px; color: #15803d;
+    }
+    .deploy-bar .dot { width: 8px; height: 8px; border-radius: 50%; background: #16a34a; flex-shrink: 0; }
+    .deploy-bar-actions { margin-left: auto; display: flex; gap: 6px; }
+
+    .btn-deploy-all {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: #16a34a; color: #fff; border: none; border-radius: 6px;
+      padding: 6px 12px; font-size: 12px; font-weight: 600; cursor: pointer;
+      font-family: inherit; transition: background .15s;
+    }
+    .btn-deploy-all:hover:not(:disabled) { background: #15803d; }
+    .btn-deploy-all:disabled { opacity: .5; cursor: not-allowed; }
+
+    .card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 18px 12px; gap: 8px;
+    }
+    .badge-status {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px;
+    }
+    .badge-new { background: #f3f4f6; color: #6b7280; }
+    .badge-updated { background: #fef3c7; color: #b45309; }
+    .badge-deployed { background: #dcfce7; color: #15803d; }
+
+    .btn-deploy-one {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: #2563eb; color: #fff; border: none; border-radius: 6px;
+      padding: 5px 11px; font-size: 12px; font-weight: 600; cursor: pointer;
+      font-family: inherit; transition: background .15s; white-space: nowrap;
+    }
+    .btn-deploy-one:hover:not(:disabled) { background: #1d4ed8; }
+    .btn-deploy-one:disabled { opacity: .5; cursor: not-allowed; }
+    .btn-redeploy-one {
+      background: #f3f4f6; color: #374151;
+    }
+    .btn-redeploy-one:hover:not(:disabled) { background: #e5e7eb; }
+
+    .spin { display: inline-block; width: 10px; height: 10px; border: 2px solid currentColor; border-top-color: transparent; border-radius: 50%; animation: spin .6s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Toast ── */
+    #toast { position: fixed; bottom: 20px; right: 20px; z-index: 999; display: flex; flex-direction: column; gap: 6px; }
+    .toast-item { background: #1f2937; color: #fff; padding: 10px 14px; border-radius: 8px; font-size: 13px; max-width: 320px; box-shadow: 0 4px 12px rgba(0,0,0,.3); animation: slideIn .2s ease; }
+    .toast-item.ok { border-left: 3px solid #16a34a; }
+    .toast-item.err { border-left: 3px solid #dc2626; }
+    @keyframes slideIn { from { transform: translateX(16px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+    @media(max-width:768px) {
+      .page-wrap { flex-direction: column; }
+      .toc-aside { width: 100%; position: static; max-height: none; border-bottom: 1px solid #e5e7eb; padding-bottom: 16px; margin-bottom: 4px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="site-header">
+  <div class="inner">
+    <h1>에너지노 업무기록</h1>
+    <p id="headerMeta">문서 목록을 불러오는 중...</p>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <!-- ── TOC Sidebar ── -->
+  <aside class="toc-aside" id="tocAside">
+    <div style="color:#9ca3af;font-size:13px;padding:8px">불러오는 중...</div>
+  </aside>
+
+  <!-- ── Main content ── -->
+  <div class="main-content">
+    <div class="tab-bar">
+      <button class="tab active" onclick="switchTab('daily')">일일업무보고</button>
+      <button class="tab" onclick="switchTab('weekly')">주간보고</button>
+      <button class="tab" onclick="switchTab('retro')">회고</button>
+    </div>
+
+    <div id="panel-daily" class="cat-panel active">
+      <div class="loading">불러오는 중...</div>
+    </div>
+    <div id="panel-weekly" class="cat-panel">
+      <div class="loading">불러오는 중...</div>
+    </div>
+    <div id="panel-retro" class="cat-panel">
+      <div class="loading">불러오는 중...</div>
+    </div>
+  </div>
+
+</div><!-- .page-wrap -->
+
+<div id="toast"></div>
+
+<script>
+const LOCAL = 'http://localhost:4567';
+let allFiles = [];      // from files.json (always)
+let localFiles = [];    // from localhost api (when server running)
+let serverOnline = false;
+let activeTab = 'daily';
+
+// ── Tab switching ──────────────────────────────────────────────────────────────
+function switchTab(tab) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.cat-panel').forEach(p => p.classList.remove('active'));
+  const tabOrder = ['daily', 'weekly', 'retro'];
+  document.querySelectorAll('.tab')[tabOrder.indexOf(tab)].classList.add('active');
+  document.getElementById('panel-' + tab).classList.add('active');
+  activeTab = tab;
+  renderToc(tab);
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function fmtDate(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  return `${d.getFullYear()}/${String(d.getMonth()+1).padStart(2,'0')}/${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function localFile(id) {
+  return localFiles.find(f => f.id === id);
+}
+
+function fileStatus(f) {
+  if (!serverOnline) return null;
+  const lf = localFile(f.id);
+  return lf ? lf.status : null;
+}
+
+// ── TOC sidebar ───────────────────────────────────────────────────────────────
+function renderToc(catId) {
+  const aside = document.getElementById('tocAside');
+  const files = allFiles.filter(f => f.category === catId);
+  if (!files.length) { aside.innerHTML = '<div style="color:#9ca3af;font-size:12px;padding:8px">문서 없음</div>'; return; }
+
+  let html = '';
+
+  if (catId === 'daily') {
+    const folders = {};
+    for (const f of files) {
+      const k = f.folder || '';
+      if (!folders[k]) folders[k] = [];
+      folders[k].push(f);
+    }
+    const folderKeys = Object.keys(folders).sort((a, b) => b.localeCompare(a, 'ko'));
+
+    for (const fKey of folderKeys) {
+      const items = folders[fKey];
+      const isApril = fKey === '2026-04';
+      const tocFolderId = 'toc_folder_' + fKey.replace(/\W/g,'_');
+
+      if (fKey) {
+        html += `<div class="toc-folder-label" onclick="toggleTocFolder('${tocFolderId}')">
+          <span class="toc-folder-toggle${isApril ? '' : ' open'}" id="toctoggle_${tocFolderId}">▶</span>
+          📁 ${esc(fKey)}
+        </div>`;
+      }
+      html += `<div class="toc-folder-body${isApril ? ' collapsed' : ''}" id="${tocFolderId}">`;
+
+      for (const f of items) {
+        if (f.sections && f.sections.length > 0) {
+          html += `<div class="toc-file-link" style="cursor:default;margin-top:4px">${esc(f.name)}</div>`;
+          for (const s of f.sections) {
+            html += `<a href="${f.htmlPath}#${s.id}" class="toc-section-link" title="${esc(s.text)}">${esc(s.text)}</a>`;
+          }
+        } else {
+          html += `<a href="${f.htmlPath}" class="toc-file-link" style="padding-left:18px">${esc(f.name)}</a>`;
+        }
+      }
+      html += `</div>`;
+      if (fKey) html += '<hr class="toc-divider">';
+    }
+
+  } else {
+    for (const f of files) {
+      html += `<div class="toc-file-link" style="cursor:default">${esc(f.name)}</div>`;
+      if (f.sections && f.sections.length > 0) {
+        for (const s of f.sections) {
+          html += `<a href="${f.htmlPath}#${s.id}" class="toc-section-link" title="${esc(s.text)}">${esc(s.text)}</a>`;
+        }
+      }
+      html += '<hr class="toc-divider">';
+    }
+  }
+
+  aside.innerHTML = html || '<div style="color:#9ca3af;font-size:12px;padding:8px">항목 없음</div>';
+}
+
+function toggleTocFolder(id) {
+  const body = document.getElementById(id);
+  const toggle = document.getElementById('toctoggle_' + id);
+  const collapsed = body.classList.contains('collapsed');
+  body.classList.toggle('collapsed', !collapsed);
+  toggle.classList.toggle('open', collapsed);
+}
+
+// ── Deploy bar (shown only when server online) ────────────────────────────────
+function renderDeployBar(catId) {
+  if (!serverOnline) return '';
+  const catFiles = localFiles.filter(f => f.category === catId);
+  const pending = catFiles.filter(f => f.status !== 'deployed').length;
+  const label = pending > 0
+    ? `로컬 서버 연결됨 — <strong>${pending}개</strong> 미배포/업데이트 문서`
+    : '로컬 서버 연결됨 — 모든 문서 배포됨';
+  return `<div class="deploy-bar" id="deployBar_${catId}">
+    <span class="dot"></span>
+    <span>${label}</span>
+    <div class="deploy-bar-actions">
+      <button class="btn-deploy-all" id="btnAll_${catId}" onclick="deployAll('${catId}')"${pending === 0 ? ' disabled' : ''}>
+        ▲ 미배포 전체 배포
+      </button>
+    </div>
+  </div>`;
+}
+
+// ── Status badge + deploy button for a file ──────────────────────────────────
+function renderCardFooter(f) {
+  if (!serverOnline) return '';
+  const lf = localFile(f.id);
+  const status = lf ? lf.status : 'deployed';
+  const badgeClass = { new: 'badge-new', updated: 'badge-updated', deployed: 'badge-deployed' }[status];
+  const badgeText = { new: '미배포', updated: '업데이트됨', deployed: '배포됨' }[status];
+  const btnClass = status === 'deployed' ? 'btn-deploy-one btn-redeploy-one' : 'btn-deploy-one';
+  const btnText = status === 'deployed' ? '재배포' : '배포';
+  const safeId = f.id.replace(/[^a-zA-Z0-9가-힣._~-]/g, '_');
+  return `<div class="card-footer">
+    <span class="badge-status ${badgeClass}">${badgeText}</span>
+    <button class="${btnClass}" id="dbtn_${safeId}" onclick="deployOne(${JSON.stringify(f.id)}, ${JSON.stringify(safeId)})">${btnText}</button>
+  </div>`;
+}
+
+// ── Main panel rendering ───────────────────────────────────────────────────────
+function renderPanel(catId, files) {
+  const panel = document.getElementById('panel-' + catId);
+  if (!files.length) { panel.innerHTML = '<div class="empty">배포된 문서가 없습니다.</div>'; return; }
+
+  const folders = {};
+  for (const f of files) {
+    const k = f.folder || '';
+    if (!folders[k]) folders[k] = [];
+    folders[k].push(f);
+  }
+
+  const folderKeys = Object.keys(folders).sort((a, b) => b.localeCompare(a, 'ko'));
+  let html = renderDeployBar(catId);
+
+  for (const fKey of folderKeys) {
+    const items = folders[fKey];
+    const folderId = `folder_${catId}_${fKey.replace(/\W/g,'_')}`;
+    const collapsed = catId === 'daily' && fKey === '2026-04';
+
+    html += '<div class="folder-section">';
+    if (fKey) {
+      html += `<div class="folder-label" onclick="toggleFolder('${folderId}')">
+        <span class="folder-toggle${collapsed ? '' : ' open'}" id="toggle_${folderId}">▶</span>
+        📁 ${esc(fKey)}
+        <span style="color:#9ca3af;font-size:11px;font-weight:400">${items.length}개</span>
+      </div>`;
+    }
+    html += `<div class="folder-body${collapsed ? ' collapsed' : ''}" id="${folderId}">`;
+
+    if (catId === 'daily' && fKey === '2026-04') {
+      html += '<div class="doc-list">';
+      for (const f of items) {
+        const safeId = f.id.replace(/[^a-zA-Z0-9가-힣._~-]/g, '_');
+        const status = fileStatus(f);
+        const badgeHtml = status ? (() => {
+          const bc = { new: 'badge-new', updated: 'badge-updated', deployed: 'badge-deployed' }[status];
+          const bt = { new: '미배포', updated: '업데이트됨', deployed: '배포됨' }[status];
+          return `<span class="badge-status ${bc}" style="margin-right:4px">${bt}</span>`;
+        })() : '';
+        html += `<div class="doc-list-item" style="flex-wrap:wrap;gap:6px">
+          <a href="${f.htmlPath}" style="flex:1;display:flex;align-items:center;gap:8px;text-decoration:none;color:inherit;min-width:0">
+            <span class="doc-list-item-name">${esc(f.name)}</span>
+            ${badgeHtml}
+          </a>
+          <span class="doc-list-item-date">${fmtDate(f.deployedAt)}</span>
+          ${serverOnline ? `<button class="${status === 'deployed' ? 'btn-deploy-one btn-redeploy-one' : 'btn-deploy-one'}" id="dbtn_${safeId}" onclick="deployOne(${JSON.stringify(f.id)}, ${JSON.stringify(safeId)})">${status === 'deployed' ? '재배포' : '배포'}</button>` : '<span class="doc-list-arrow">›</span>'}
+        </div>`;
+      }
+      html += '</div>';
+    } else if (catId === 'daily') {
+      html += '<div style="display:flex;flex-direction:column;gap:12px">';
+      for (const f of items) {
+        html += `<div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden">
+          <a href="${f.htmlPath}" style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;text-decoration:none;color:inherit;transition:background .12s" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background=''">
+            <span style="font-size:15px;font-weight:600">${esc(f.name)}</span>
+            <span style="font-size:12px;color:#9ca3af">${fmtDate(f.deployedAt)} 배포</span>
+          </a>`;
+        if (f.sections && f.sections.length > 0) {
+          html += '<div class="section-list">';
+          for (const s of f.sections) {
+            html += `<a href="${f.htmlPath}#${s.id}" class="section-chip">${esc(s.text)}</a>`;
+          }
+          html += '</div>';
+        }
+        html += renderCardFooter(f);
+        html += '</div>';
+      }
+      html += '</div>';
+    } else {
+      html += '<div style="display:flex;flex-direction:column;gap:12px">';
+      for (const f of items) {
+        html += `<div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden">
+          <a href="${f.htmlPath}" style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;text-decoration:none;color:inherit;transition:background .12s" onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background=''">
+            <span style="font-size:15px;font-weight:600">${esc(f.name)}</span>
+            <span style="font-size:12px;color:#9ca3af">${fmtDate(f.deployedAt)} 배포</span>
+          </a>`;
+        if (f.sections && f.sections.length > 0) {
+          html += '<div class="section-list">';
+          for (const s of f.sections) {
+            html += `<a href="${f.htmlPath}#${s.id}" class="section-chip">${esc(s.text)}</a>`;
+          }
+          html += '</div>';
+        }
+        html += renderCardFooter(f);
+        html += '</div>';
+      }
+      html += '</div>';
+    }
+
+    html += '</div>'; // folder-body
+    html += '</div>'; // folder-section
+  }
+
+  panel.innerHTML = html;
+}
+
+function toggleFolder(id) {
+  const body = document.getElementById(id);
+  const toggle = document.getElementById('toggle_' + id);
+  const isCollapsed = body.classList.contains('collapsed');
+  body.classList.toggle('collapsed', !isCollapsed);
+  toggle.classList.toggle('open', isCollapsed);
+}
+
+// ── Deploy actions ────────────────────────────────────────────────────────────
+async function deployOne(fileId, safeId) {
+  const btn = document.getElementById('dbtn_' + safeId);
+  if (!btn) return;
+  const origText = btn.textContent;
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span>';
+
+  try {
+    const res = await fetch(LOCAL + '/api/deploy', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ids: [fileId] })
+    });
+    const data = await res.json();
+    if (data.vercel?.ok) {
+      showToast(`배포 완료 — ${fileId.split('/').pop()}`, 'ok');
+      await refreshLocal();
+      renderAll();
+    } else {
+      showToast(`배포 실패: ${data.vercel?.error || '알 수 없는 오류'}`, 'err');
+      btn.disabled = false;
+      btn.textContent = origText;
+    }
+  } catch (e) {
+    showToast('서버 오류: ' + e.message, 'err');
+    btn.disabled = false;
+    btn.textContent = origText;
+  }
+}
+
+async function deployAll(catId) {
+  const btn = document.getElementById('btnAll_' + catId);
+  if (!btn) return;
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span> 배포 중...';
+
+  try {
+    const res = await fetch(LOCAL + '/api/deploy-all', { method: 'POST' });
+    const data = await res.json();
+    if (data.message) {
+      showToast(data.message, 'ok');
+    } else if (data.vercel?.ok) {
+      showToast(`${data.deployed}개 배포 완료${data.failed ? ` (${data.failed}개 실패)` : ''}`, data.failed ? 'err' : 'ok');
+    } else {
+      showToast(`배포 실패: ${data.vercel?.error || '알 수 없는 오류'}`, 'err');
+    }
+    await refreshLocal();
+    renderAll();
+  } catch (e) {
+    showToast('서버 오류: ' + e.message, 'err');
+    btn.disabled = false;
+    btn.innerHTML = '▲ 미배포 전체 배포';
+  }
+}
+
+// ── Toast ─────────────────────────────────────────────────────────────────────
+function showToast(msg, type = 'ok') {
+  const container = document.getElementById('toast');
+  const el = document.createElement('div');
+  el.className = `toast-item ${type}`;
+  el.textContent = msg;
+  container.appendChild(el);
+  setTimeout(() => el.remove(), 4000);
+}
+
+// ── Render all panels ─────────────────────────────────────────────────────────
+function renderAll() {
+  const cats = ['daily', 'weekly', 'retro'];
+  for (const cat of cats) {
+    renderPanel(cat, allFiles.filter(f => f.category === cat));
+  }
+  renderToc(activeTab);
+}
+
+// ── Try local server ──────────────────────────────────────────────────────────
+async function refreshLocal() {
+  try {
+    localFiles = await fetch(LOCAL + '/api/files', { signal: AbortSignal.timeout(2000) }).then(r => r.json());
+    serverOnline = true;
+  } catch {
+    serverOnline = false;
+    localFiles = [];
+  }
+}
+
+// ── Load ──────────────────────────────────────────────────────────────────────
+async function load() {
+  try {
+    allFiles = await fetch('./files.json').then(r => r.json());
+  } catch {
+    document.querySelectorAll('.cat-panel').forEach(p => {
+      p.innerHTML = '<div class="empty">문서 목록을 불러올 수 없습니다.</div>';
+    });
+    return;
+  }
+
+  await refreshLocal();
+  renderAll();
+
+  const total = allFiles.length;
+  const lastDeploy = allFiles.reduce((max, f) => f.deployedAt > max ? f.deployedAt : max, '');
+  const serverNote = serverOnline ? ' · 🟢 로컬 서버 연결됨' : '';
+  document.getElementById('headerMeta').textContent =
+    `총 ${total}개 문서${lastDeploy ? ' · 최근 배포: ' + fmtDate(lastDeploy) : ''}${serverNote}`;
+}
+
+load();
+</script>
+</body>
+</html>

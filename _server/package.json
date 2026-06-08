@@ -1,0 +1,14 @@
+{
+  "name": "work-logs-deploy",
+  "version": "1.0.0",
+  "description": "업무 기록 문서 배포 관리 서버",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "deploy": "vercel --prod --yes"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "marked": "^4.3.0"
+  }
+}
