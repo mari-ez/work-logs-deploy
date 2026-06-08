@@ -54,9 +54,121 @@
   <div class="page-wrap">
     <aside class="toc-aside">
   <div class="toc-label">목차</div>
-  <nav class="toc-nav"><a href="#2026-06-05" class="toc-link lv3" style="padding-left:8px">2026-06-05</a><a href="#2026-06-04" class="toc-link lv3" style="padding-left:8px">2026-06-04</a><a href="#2026-06-02" class="toc-link lv3" style="padding-left:8px">2026-06-02</a><a href="#2026-06-01" class="toc-link lv3" style="padding-left:8px">2026-06-01</a></nav>
+  <nav class="toc-nav"><a href="#2026-06-08" class="toc-link lv3" style="padding-left:8px">2026-06-08</a><a href="#2026-06-05" class="toc-link lv3" style="padding-left:8px">2026-06-05</a><a href="#2026-06-04" class="toc-link lv3" style="padding-left:8px">2026-06-04</a><a href="#2026-06-02" class="toc-link lv3" style="padding-left:8px">2026-06-02</a><a href="#2026-06-01" class="toc-link lv3" style="padding-left:8px">2026-06-01</a></nav>
 </aside>
-    <main class="doc-main"><h3 id="2026-06-05">2026-06-05</h3>
+    <main class="doc-main"><h3 id="2026-06-08">2026-06-08</h3>
+<p><strong>[팀공유]</strong>
+일일보고 (김혜진) - 2026. 6. 8. (월)</p>
+<ol>
+<li>주간회의 : 09:30-10:30</li>
+<li>에너빌드 개발 sync-up w/대표님 : 11:10-11:25</li>
+<li>에너빌드 디벨로퍼 Case 2 피그마 초안 화면 작성 : <a href="https://works.do/FLHBiYb">https://works.do/FLHBiYb</a><ol>
+<li>2단계(사업정보) · 3단계(법규·규모 검토 + AI 동배치 제안) 화면 초안 작성</li>
+<li>컨펌 필요, 6/9(화) 요청 예정</li>
+</ol>
+</li>
+<li>에너빌드 디벨로퍼 스펙 문서 업데이트<ol>
+<li>Case 2, 5-1 아파트 주차 기준(법정 100%/150%/200%) 및 세대 구성비 기본값(59㎡ 40%/84㎡ 60%) 확정</li>
+<li>정비사업 구역면적 전제 정책 신규 추가 (도정법 근거)</li>
+<li>아파트 층수·세대수 산정 정책 신규 추가 — Case 2 + Case 5-1 적용, 홍교수님 검토 요청 플래그</li>
+<li>Case 1·Case 5-2 피그마 확정 화면 내용 반영 (케이스 개요 테이블 화면설계 상태 열 추가)</li>
+<li>Case 5-3 데이터센터 케이스는 상세기획 진행 시 같이 다시 검토하기로 함</li>
+</ol>
+</li>
+<li>이후 업무<ol>
+<li>에너빌드 디벨로퍼<ol>
+<li>Case 2 화면기획 컨펌 후 스펙 문서 확정 처리</li>
+<li>Case 5-1 주소검색+아파트 화면기획</li>
+<li>건물 유형별 alt 구성에 대한 미팅<ol>
+<li><a href="https://docs.google.com/spreadsheets/d/1ULEWS96zpMQNPyV3viDkphrPxESa95qGLT0UBtqxb38/edit?pli=1&gid=1377285069#gid=1377285069">https://docs.google.com/spreadsheets/d/1ULEWS96zpMQNPyV3viDkphrPxESa95qGLT0UBtqxb38/edit?pli=1&amp;gid=1377285069#gid=1377285069</a></li>
+</ol>
+</li>
+<li>Case 5-3 데이터센터 케이스 스터디 및 정책 기획</li>
+<li>GNB tobe 개발요건 정의 및 화면설계</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p><strong>[작업기록]</strong>
+일일보고 (김혜진) - 2026. 6. 8. (월)</p>
+<ol>
+<li>에너빌드 디벨로퍼 스펙 문서 업데이트: service_flow_case_overview.md<ol>
+<li><strong>아파트 주차 기준 확정</strong> (Case 5-1)<ol>
+<li>법정 100%(소형·임대) / 150%(일반 분양 평균) / 200%(고급·상한) 3가지 유지 확정</li>
+<li>각 기준별 의미 설명 및 확정 표기 추가</li>
+</ol>
+</li>
+<li><strong>세대 구성비 기본값 확정</strong> (Case 5-1)<ol>
+<li>59㎡(25평) 40% / 84㎡(34평) 60% — 서울 일반 분양 아파트 업계 통용 참고값, 임대주택 미적용</li>
+<li>개발회의 메모 검색(옵시디언) — 구체 비율 미기재 확인, 시장 통용값으로 디폴트 채택</li>
+</ol>
+</li>
+<li><strong>정비사업 구역면적 전제 정책 추가</strong> (Section 1 공통)<ol>
+<li>도정법 근거: 정비구역 지정 고시 완료 시 구역면적 관보 필수 명시 → 값 존재 전제</li>
+<li>예외 처리: 전산 반영 지연 등 일시적 조회 불가는 서비스 범위 외</li>
+<li>확인 출처: 서울시 정비몽땅·도시공간포털, 나머지 지역은 추가 조사 예정</li>
+</ol>
+</li>
+<li><strong>아파트 층수·세대수 산정 정책 신규 추가</strong> (Case 2 + Case 5-1)<ol>
+<li>층수 산정: 높이 기반(높이제한 ÷ 3m) vs 면적 기반(연면적 ÷ 건축면적) 중 최솟값</li>
+<li>세대수 산정: 연면적 × 전용률(72%) ÷ 평균 전용면적(74㎡)</li>
+<li>가정값 근거 명시: 전용률 72%(실무 범위 70-75% 중간값), 층고 3.0m(업계 통용), 세대 구성비(통계 미확인)</li>
+<li>홍교수님 검토 요청 플래그 추가 (전용률·층고·세대 구성비·산정 공식 전반)</li>
+<li>Case 2에 전체 정책 삽입, Case 5-1에는 Case 2 참조 링크로 처리</li>
+</ol>
+</li>
+<li><strong>Case 1·Case 5-2 피그마 확정 화면 내용 반영</strong><ol>
+<li>§1 케이스 구분 개요 테이블에 화면설계 상태 열 추가 (Case 1·Case 5-2: ✅ 완성, 나머지: 🕐 미착수)</li>
+<li>§2 Case 1 2단계 좌측 패널 항목 피그마 확정 기준으로 교체<ol>
+<li>구역면적·공급세대(60㎡이하/60~85/85초과)·용적률·건폐율·층수·시공사(정보 없으면 비노출)</li>
+<li>진행단계 타임라인 UI 구성 명시 (정비구역지정 → 추진위승인 → 조합설립인가 → 사업시행인가 → 관리처분인가 → 착공)</li>
+</ol>
+</li>
+<li>§6 Case 5-2 피그마 확정 stepper 구성 추가 및 3/4단계 스코프 업데이트<ol>
+<li>피그마 stepper: 기준 필지 및 합필 → 지정여부·건물유형 → 건폐율·용적률·높이·지하 → AI 건물 제안 → 에너지 연계 시뮬레이션 → 에너빌드 분석 보고서</li>
+<li>3단계에 지하층 규모 산정(주차대수 선택 UI) 포함 확정 (피그마 컨펌)</li>
+<li>4단계: AI 건물 제안만으로 분리 (지하층 산정 3단계로 이동)</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><strong>Case 5-3 데이터센터 운영 케이스 미확정으로 변경</strong><ol>
+<li>기존 &quot;의뢰받아서 짓는 케이스로 진행 확정 (2026-06-05)&quot; → 취소선 처리 후 미확정으로 재검토</li>
+<li>배경: 대표님 미팅에서 데이터센터 상세 기획 시 어떤 케이스로 진행할지 구체적 기획이 필요한 상황, 아직 타겟 확정 단계 아님</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><strong>에너빌드 디벨로퍼 Case 2 피그마 초안 화면 작성 및 검토</strong> (섹션 node 545:41681)<ol>
+<li><strong>2단계·3단계 화면 초안 작성</strong> — 케이스 오버뷰 B안 기반으로 피그마 초안 제작 (리뷰·컨펌 전 단계)</li>
+<li><strong>2단계 화면 검토</strong> (node 545:40684 — 사업정보)<ol>
+<li>스텝퍼: ✅ 정비사업명 → <strong>사업정보(현재)</strong> → 법규·규모·AI 건물 제안 → 에너지 연계 시뮬레이션 → 에너빌드 분석 보고서 — B안 5단계 구조 일치</li>
+<li>좌측 패널: 구역면적·용적률(-)·건폐율(-)·층수(-) + 진행단계 타임라인 + 안내 문구</li>
+<li>안내 문구: &quot;정비사업 초기에는 확정된 정보가 많지 않을 수 있습니다. 다음 단계에서 법규를 바탕으로 단지 규모를 예측하고, AI를 통해 우리 단지의 동배치를 확인해 볼 수 있습니다.&quot;</li>
+<li>우측: 지도 + 주소/합필 면적 팝업</li>
+</ol>
+</li>
+<li><strong>3단계 화면 검토</strong> (node 545:40920 — 법규 및 규모 검토 · AI 동배치 제안)<ol>
+<li>법규 섹션: 건폐율·용적률·높이(층수)제한 + 근거 문서 버튼</li>
+<li>세대 수 산정: 공급세대·59타입·84타입 + 지하 주차장(주차 가능 대수·법정 충족 여부·100%/150%/200% 선택·주차 면적)</li>
+<li>건축 규모 산정 결과 박스: 대지면적·건축면적·지상연면적·지하연면적·전체연면적·건폐율(법정 비교)·용적률(법정 비교)·용적률산정면적</li>
+<li>우측: 지도 + AI CTA 오버레이 (&quot;AI 단지 동 배치도 생성&quot; 버튼)</li>
+</ol>
+</li>
+<li><strong>세대수 계산 오류 발견</strong>: 피그마 기재 25평 569/34평 565세대 (약 50:50) → 올바른 값 25평 <strong>454세대</strong>/34평 <strong>680세대</strong> (59타입 40%·84타입 60%, 합계 1,134) — 피그마 직접 수정 필요</li>
+</ol>
+</li>
+<li><strong>service_flow_case_overview.md §3 Case 2 B안 업데이트</strong><ol>
+<li><strong>2단계 패널 항목 교체</strong>: 구역면적·용적률(-%)·건폐율(-%)·층수(-층), 시공사 비노출, 안내 문구 피그마 기준 교체, 우측 지도+팝업 방식 추가</li>
+<li><strong>3단계 지하 주차 디폴트 100% → 150% 변경</strong>: 아파트는 통상 150%가 일반 분양 단지의 현실적 주차 수준 (100%는 소형·임대 수준) — 이유 문서에 기재</li>
+<li><strong>3단계 건축 규모 산정 결과 박스 항목 추가</strong> (피그마 초안 기준): 대지면적·건축면적·지상연면적·지하연면적·전체연면적·건폐율·용적률·용적률산정면적 — 컨펌 후 확정 표기</li>
+<li><strong>3단계 AI 렌더링 방식</strong>: 우측 지도 위 CTA 오버레이 + &quot;AI 단지 동 배치도 생성&quot; 버튼 클릭 → 생성 방식 (피그마 초안 기준, 컨펌 후 확정)</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="2026-06-05">2026-06-05</h3>
 <p><strong>[팀공유]</strong>
 일일보고 (김혜진) - 2026. 6. 5. (금)</p>
 <ol>
