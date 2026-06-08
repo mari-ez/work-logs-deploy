@@ -319,24 +319,28 @@ function updateFilesJson() {
   fs.writeFileSync(FILES_JSON_PATH, JSON.stringify(deployed, null, 2));
 }
 
-function runVercel() {
+function runGitPush(commitMsg) {
   try {
-    const out = execSync('vercel --prod --yes', {
-      cwd: DIR, // Deploy from root, not _server/
-      encoding: 'utf8',
-      timeout: 180000,
-      env: { ...process.env }
-    });
-    // Strip ANSI/terminal escape codes before embedding in JSON
-    const clean = out.replace(/\x1b\[[0-9;?]*[A-Za-z]/g, '').replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, '');
-    const lines = clean.split('\n').filter(l => l.trim()).slice(-6).join('\n');
-    // Prefer stable production alias URL (Aliased line)
-    const aliasMatch = clean.match(/Aliased\s+(https:\/\/[\w.-]+\.vercel\.app)/);
-    const urlMatch = clean.match(/https:\/\/[\w-]+\.vercel\.app/);
-    const url = aliasMatch ? aliasMatch[1] : (urlMatch ? urlMatch[0] : '');
-    return { ok: true, url, output: lines };
+    const cfg = loadConfig();
+    const token = cfg.githubToken || '';
+    const remote = cfg.githubRemote || '';
+    if (!token || !remote) return { ok: false, error: 'config.json에 githubToken, githubRemote가 없습니다.' };
+
+    // Inject token into remote URL for authentication
+    const authedRemote = remote.replace('https://', `https://${token}@`);
+
+    execSync('git add .', { cwd: DIR, encoding: 'utf8' });
+
+    // Check if there's anything to commit
+    const status = execSync('git status --porcelain', { cwd: DIR, encoding: 'utf8' });
+    if (!status.trim()) return { ok: true, url: cfg.vercelUrl || '', output: '변경 없음 — push 생략' };
+
+    execSync(`git commit -m "${commitMsg.replace(/"/g, "'")}"`, { cwd: DIR, encoding: 'utf8' });
+    execSync(`git push ${authedRemote} main`, { cwd: DIR, encoding: 'utf8', timeout: 60000 });
+
+    return { ok: true, url: cfg.vercelUrl || '', output: 'GitHub push 완료 → Vercel 자동 배포 진행 중' };
   } catch (e) {
-    const errText = (e.stderr || e.message || '').replace(/\x1b\[[0-9;?]*[A-Za-z]/g, '').slice(0, 400);
+    const errText = (e.stderr || e.stdout || e.message || '').slice(0, 400);
     return { ok: false, error: errText };
   }
 }
@@ -379,15 +383,10 @@ app.post('/api/deploy', (req, res) => {
   }
 
   updateFilesJson();
-  const vercel = runVercel();
+  const names = toProcess.map(f => f.name).join(', ');
+  const git = runGitPush(`docs: ${names} 배포`);
 
-  if (vercel.ok && vercel.url) {
-    const cfg = loadConfig();
-    cfg.vercelUrl = vercel.url;
-    saveConfig(cfg);
-  }
-
-  res.json({ ok: true, results, vercel });
+  res.json({ ok: true, results, vercel: git });
 });
 
 app.post('/api/deploy-all', (req, res) => {
@@ -411,20 +410,14 @@ app.post('/api/deploy-all', (req, res) => {
   }
 
   updateFilesJson();
-  const vercel = runVercel();
-
-  if (vercel.ok && vercel.url) {
-    const cfg = loadConfig();
-    cfg.vercelUrl = vercel.url;
-    saveConfig(cfg);
-  }
+  const git = runGitPush('docs: 전체 문서 배포');
 
   res.json({
     ok: true,
     deployed: results.filter(r => r.ok).length,
     failed: results.filter(r => !r.ok).length,
     results,
-    vercel
+    vercel: git
   });
 });
 
