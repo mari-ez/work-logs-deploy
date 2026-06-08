@@ -1,5 +1,17 @@
 [
   {
+    "id": "daily/TO-DO.md",
+    "slug": "daily/TO-DO",
+    "category": "daily",
+    "categoryLabel": "일일업무보고",
+    "name": "TO-DO",
+    "folder": "",
+    "lastModified": "2026-06-08T02:52:56.486Z",
+    "deployedAt": "2026-06-08T08:57:46.172Z",
+    "htmlPath": "docs/daily/TO-DO.html",
+    "sections": []
+  },
+  {
     "id": "daily/2026.06.md",
     "slug": "daily/2026.06",
     "category": "daily",
