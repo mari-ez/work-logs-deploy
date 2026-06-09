@@ -18,10 +18,14 @@
     "categoryLabel": "일일업무보고",
     "name": "2026.06",
     "folder": "",
-    "lastModified": "2026-06-08T08:55:59.356Z",
-    "deployedAt": "2026-06-08T08:56:58.179Z",
+    "lastModified": "2026-06-09T08:32:33.836Z",
+    "deployedAt": "2026-06-09T08:34:31.129Z",
     "htmlPath": "docs/daily/2026.06.html",
     "sections": [
+      {
+        "id": "2026-06-09",
+        "text": "2026-06-09"
+      },
       {
         "id": "2026-06-08",
         "text": "2026-06-08"
