@@ -61,49 +61,24 @@
 일일보고 (김혜진) - 2026. 6. 12. (금)</p>
 <ol>
 <li>에너빌드 디벨로퍼<ol>
-<li>alt 정책 테이블 설계 보강 및 시트 운용 정비<ol>
+<li>alt 정책 테이블 설계 보강 (조합 문구 테이블 신설, 시트 운용 방식 정비)<ol>
 <li>스펙문서 : <a href="https://vercel-spec-deploy.vercel.app/viewer.html?file=alt_policy_table_design">https://vercel-spec-deploy.vercel.app/viewer.html?file=alt_policy_table_design</a></li>
-<li>설명 소절 4건 신설 (프리셋 변형 번호·플래그 구조·alt 생성 워크플로우·설비 콘텐츠 문장 사용 가이드), 설비 콘텐츠(09) 등급 표기 숫자 코드(3 유리/2 보통/1 불리) 전환</li>
-<li>14번 조합 문구 테이블 신설 : 프리셋(설비 조합) 단위 안내 문구 템플릿 — 별도 테이블 + 프리셋 FK 참조, 집단에너지 Y/N 행 분리 (13→14테이블 확장)</li>
-<li>시트 운용 방식 확정 : 드라이브 4폴더 구조·13개 시트 링크 전수 정리, 사람이 직접 수정(재생성 금지), FK 명칭 참조 수식 가이드 작성(07·08 시트 적용)</li>
 </ol>
 </li>
-<li>의사결정 요청 문서 작성·배포 — 대표님·전무님 확인 요청<ol>
+<li>의사결정 요청 문서 작성·배포 — 대표님·전무님 확인 요청 (가치 후보·건물유형별 매핑·평가항목)<ol>
 <li>문서 : <a href="https://vercel-spec-deploy.vercel.app/viewer.html?file=decision_request_20260612">https://vercel-spec-deploy.vercel.app/viewer.html?file=decision_request_20260612</a> (모바일 열람 가능)</li>
-<li>건물조건 13종(MVP 5종)·가치 후보 12종·평가항목 11종 목록 + 건물유형별 제공 가치 매핑표(초안)</li>
-<li>확인 요청 : ① 가치 추가·삭제 ② 건축 인센티브·ZEB 인증 통합 여부 ③ MVP 유형별 3가치 선정 ④ 평가항목 우선순위·혜택/리스크 노출 방식</li>
 </ol>
 </li>
-<li>분석단계 건물유형별 보고서 내용 실무회의 (12:50~15:45, 박사님·김혜진)<ol>
-<li>결과물 : <a href="https://docs.google.com/spreadsheets/d/1t2i_SorVp_Lhg2wRd1dbr5ec8BMkOR1cSv29no292es/edit?gid=0#gid=0">https://docs.google.com/spreadsheets/d/1t2i_SorVp_Lhg2wRd1dbr5ec8BMkOR1cSv29no292es/edit?gid=0#gid=0</a></li>
-<li>후속 : 6/15(월) 주간회의 후 전무님 리뷰 일정 요청 예정</li>
-</ol>
-</li>
-<li>5·6단계 화면기획 작업 계획 수립 (step5 기존 문서 6종 전수 검토)<ol>
-<li>정책 논의 문서 : <a href="https://vercel-spec-deploy.vercel.app/viewer.html?file=step5_6_policy_discussion">https://vercel-spec-deploy.vercel.app/viewer.html?file=step5_6_policy_discussion</a></li>
-<li>기존 문서 유효성 분류 및 구 스펙 대체 4건 식별 (가치 기반 alt 생성·집단에너지 사용자 선택 플래그·평가항목 11종 마스터·콘텐츠 테이블 바인딩)</li>
-<li>화면 인벤토리 S1<del>S7 + 작업 계획 Phase 0</del>4 수립 (alt 조회·비교 시안 = 의사결정 자료), 쟁점 7건 정리</li>
-</ol>
-</li>
-<li>설비 콘텐츠(09) 작성 기획 — 구조 전환 결정<ol>
-<li>논의 문서 : <a href="https://vercel-spec-deploy.vercel.app/viewer.html?file=alt_table09_content_design">https://vercel-spec-deploy.vercel.app/viewer.html?file=alt_table09_content_design</a></li>
-<li>박사님 초안 검토·88셀 커버리지 분석 → 문장을 (설비×평가항목) 88셀이 아닌 설비별 한 문장(비중 구간 3단)으로 작성하는 구조로 전환</li>
-<li>항목별 등급(88셀)·alt 비교표 노출은 화면설계(A10)와 묶어 보류</li>
-</ol>
-</li>
-<li>5단계 alt 생성 화면 UI 기획 논의 (피그마 기반 정책 검토 완료 — 프로토타입 확인 후 일괄 문서화 예정)<ol>
-<li>가치 레이블 변경 : &#39;최저 설치비용&#39; → &#39;법규충족&#39;, 아파트는 프리셋 2종(법규충족-최저비용 / 법규충족-에너빌드추천, 가제)</li>
-<li>alt 생성 UX 확정 : 빈 alt 카드 클릭 → 인라인 생성 패널, 화면 동시 노출 최대 5장·개별 삭제 제공(DB 보존), ZEB 등급 목표는 alt 입력 스냅샷에 저장</li>
-<li>도시가스 안내 문구 미노출 확정, 데이터센터는 본 화면 배제(별도 특화 flow 기획 예정)</li>
-</ol>
-</li>
+<li>분석단계 건물유형별 보고서 내용 실무회의 (박사님) — 6/15(월) 주간회의 후 전무님 리뷰 일정 요청 예정</li>
+<li>5·6단계 화면기획 작업 계획 수립 : <a href="https://vercel-spec-deploy.vercel.app/viewer.html?file=step5_6_policy_discussion">https://vercel-spec-deploy.vercel.app/viewer.html?file=step5_6_policy_discussion</a></li>
+<li>설비 콘텐츠 작성 구조 전환 결정 (88셀 → 설비별 문장) : <a href="https://vercel-spec-deploy.vercel.app/viewer.html?file=alt_table09_content_design">https://vercel-spec-deploy.vercel.app/viewer.html?file=alt_table09_content_design</a></li>
+<li>5단계 alt 생성 화면 UI 기획 논의 — 정책 검토 완료, 프로토타입 확인 후 문서화 예정</li>
 </ol>
 </li>
 <li>이후 업무<ol>
 <li>에너빌드 디벨로퍼 분석 단계 (ing)<ol>
-<li>6/15(월) 재개 : 설비 콘텐츠 설비별 문장 작성(7설비×3구간+각주) → 박사님 검수, 08 프리셋·14번 조합 문구 행 작성</li>
-<li>alt 생성 화면 프로토타입 제작 → 화면구성 확인 후 정책 확정·일괄 문서화</li>
-<li>의사결정 요청 회신 반영 (가치 목록·매핑표 확정 → 07 매핑 테이블 초안)</li>
+<li>설비 콘텐츠 문장·정책 테이블 행 작성 (6/15 재개)</li>
+<li>alt 생성 화면 프로토타입 제작</li>
 </ol>
 </li>
 <li>정비사업 공공/민간 구분값 DB 추가 : 6월 4주차에 재개 가능</li>
@@ -111,7 +86,7 @@
 </ol>
 </li>
 <li>이슈사항<ol>
-<li>의사결정 요청 문서 확인 필요 : 대표님·전무님 (가치 후보 12종·건물유형별 매핑표·평가항목 우선순위)</li>
+<li>의사결정 요청 문서 확인 필요 : 대표님·전무님</li>
 <li>디자인 일정 확인 필요 (기획 내용 확정 후 협의 가능)</li>
 <li>박사님 작성 선행조건 2건 결정 필요 : 소요량→용량 환산 규칙(A4), 방위별 입면 정보 보유 확인(A5 — 백엔드)</li>
 </ol>
