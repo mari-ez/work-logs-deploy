@@ -54,9 +54,47 @@
   <div class="page-wrap">
     <aside class="toc-aside">
   <div class="toc-label">목차</div>
-  <nav class="toc-nav"><a href="#2026-06-11" class="toc-link lv3" style="padding-left:8px">2026-06-11</a><a href="#2026-06-10" class="toc-link lv3" style="padding-left:8px">2026-06-10</a><a href="#2026-06-09" class="toc-link lv3" style="padding-left:8px">2026-06-09</a><a href="#2026-06-08" class="toc-link lv3" style="padding-left:8px">2026-06-08</a><a href="#2026-06-05" class="toc-link lv3" style="padding-left:8px">2026-06-05</a><a href="#2026-06-04" class="toc-link lv3" style="padding-left:8px">2026-06-04</a><a href="#2026-06-02" class="toc-link lv3" style="padding-left:8px">2026-06-02</a><a href="#2026-06-01" class="toc-link lv3" style="padding-left:8px">2026-06-01</a></nav>
+  <nav class="toc-nav"><a href="#2026-06-12" class="toc-link lv3" style="padding-left:8px">2026-06-12</a><a href="#2026-06-11" class="toc-link lv3" style="padding-left:8px">2026-06-11</a><a href="#2026-06-10" class="toc-link lv3" style="padding-left:8px">2026-06-10</a><a href="#2026-06-09" class="toc-link lv3" style="padding-left:8px">2026-06-09</a><a href="#2026-06-08" class="toc-link lv3" style="padding-left:8px">2026-06-08</a><a href="#2026-06-05" class="toc-link lv3" style="padding-left:8px">2026-06-05</a><a href="#2026-06-04" class="toc-link lv3" style="padding-left:8px">2026-06-04</a><a href="#2026-06-02" class="toc-link lv3" style="padding-left:8px">2026-06-02</a><a href="#2026-06-01" class="toc-link lv3" style="padding-left:8px">2026-06-01</a></nav>
 </aside>
-    <main class="doc-main"><h3 id="2026-06-11">2026-06-11</h3>
+    <main class="doc-main"><h3 id="2026-06-12">2026-06-12</h3>
+<p><strong>[작업기록]</strong>
+일일보고 (김혜진) - 2026. 6. 12. (금)</p>
+<ol>
+<li><strong>alt 정책 테이블 설계 문서 보강 (<code>alt_policy_table_design.md</code> — 설명 소절 4건 신설)</strong><ol>
+<li>프리셋 변형 번호 설명: 정의(한 조합에서 복수 alt 생성 시 행 구분 키)·필요 사유(최저 설치비용 = 변형 1~3)·변형별 결정론(같은 입력+같은 변형 = 같은 alt)</li>
+<li>프리셋 플래그 구조: 플래그는 현재 집단에너지 1개뿐이나 키 축 추가·행 분화로 확장 가능한 구조 명시. <strong>MVP 프리셋은 집단에너지 Y/N 양쪽 조합 행 모두 작성 결정</strong></li>
+<li>alt 생성 워크플로우 명문화: 엔진은 프리셋 ID가 아닌 키 조합(건물조건×가치×플래그)으로 조회 — ID는 조회 후 참조용(alt 저장 기록, ID 접미 <code>_1</code>은 작명 관례일 뿐 원본은 변형 번호 컬럼). 변형 번호당 1행 → 행당 alt 1개, 프리셋 행은 우선순위·오버라이드만 직접 보유(설비 숫자값·정지조건 기본값은 FK 참조·가치 상속)</li>
+<li>설비 콘텐츠(09) 문장 컬럼 사용 가이드: 근거 문장(등급의 이유·완성문) / 주의 문장(등급과 별개의 단서·경고 — 지열 시설물 미체크 안내 등) / 문구 템플릿(슬롯 틀 — 비중·등급을 런타임 조립, 12번 조립 규칙이 소비) 역할·조립 시점 구분. 경계 미확정 케이스는 88행 작성 중 A9(조립 규칙 상세)와 묶어 확정</li>
+</ol>
+</li>
+<li><strong>정책 테이블 시트 운용 정비</strong><ol>
+<li>드라이브 하위 폴더 4구조(00_마스터테이블 / 10_매핑테이블 / 20_정책,규칙테이블 / 30_alt_table) 확인 — 문서 5-1·5-2에 13개 시트·폴더 링크 전수 추가</li>
+<li>시트 운용 방식 확정: 분리 문서 구조 유지 + <strong>사람이 직접 수정</strong>(재생성 금지 — 문서 ID 변경 시 링크·IMPORTRANGE 참조 깨짐)</li>
+<li>FK 명칭 컬럼 운용 규칙: 읽기용 참고(원본은 FK+마스터 명칭, DB 적재 시 백엔드 무시), VLOOKUP+IMPORTRANGE 수식 가이드 작성 — 07·08 시트 적용분(ARRAYFORMULA 자동 전개판 포함), FK 입력용 드롭다운(데이터 확인 + <code>_ref</code> 탭) 안내</li>
+</ol>
+</li>
+<li><strong>설비 콘텐츠(09) 등급 표기 변경: ●◑○ → 숫자 코드 3(유리)/2(보통)/1(불리)</strong><ol>
+<li>목적: 혼합평가 집계의 산술화(최악값=MIN·최고값=MAX·가중평균=평균), ●◑○는 화면 표시 전용 매핑으로 격하</li>
+<li>09 시트 헤더·등급 드롭다운(1/2/3 숫자 값 + 색상 칩) 적용 완료</li>
+</ol>
+</li>
+<li><strong>의사결정 요청 문서 신규 작성·배포 (<code>2026-06-12_의사결정요청_건물조건_가치_평가항목.md</code> → <code>decision_request_20260612</code>)</strong><ol>
+<li>건물조건 13종(MVP 5종)·가치 후보 12종·평가항목 11종 목록 — 대표님·전무님 모바일 확인용, 01·03·06 시트 원본 기반</li>
+<li>건물유형별 제공 가치 매핑표 신설(MVP 5유형 × 12가치, ● 특히 적합/○ 제공/– 미제공) — 03 시트 &#39;주 대상&#39; 컬럼 기반, 확정 시 07 매핑 테이블 초안 역할</li>
+<li>확인 요청 질문 구성: 가치 추가·삭제 / 건축 인센티브·ZEB 인증 통합 여부(분리 사유 본문 명시) / MVP 유형별 3가치 선정(3가치여도 alt 5개 — 최저 설치비용 3개) / 평가항목 우선순위·혜택/리스크 노출 방식(시뮬레이션=서술형·보고서=항목 분리 의견 포함)</li>
+<li>문서 전반 일관성 검토 및 수정 반영: 매핑표 성격을 &#39;제공 구성 제안(초안)&#39;으로 명시, 평가항목 우선순위 질문 정식 편입(③ 신설·기존 ③→④), alt 표기 통일·오탈자 정리</li>
+<li>배포: <a href="https://vercel-spec-deploy.vercel.app/viewer.html?file=decision_request_20260612">https://vercel-spec-deploy.vercel.app/viewer.html?file=decision_request_20260612</a> (대시보드 &#39;기획 스펙&#39; 섹션 카드 추가, 모바일 열람 확인 완료)</li>
+</ol>
+</li>
+<li><strong>문서 배포</strong>: <a href="https://vercel-spec-deploy.vercel.app/viewer.html?file=alt_policy_table_design">https://vercel-spec-deploy.vercel.app/viewer.html?file=alt_policy_table_design</a> (커밋 d21aaa2~33c3f11, 의사결정 요청 90e70a3)</li>
+<li><strong>분석단계 건물유형별 보고서 내용 실무회의 (12:50~15:45, 박사님·김혜진)</strong><ol>
+<li>결과물: <a href="https://docs.google.com/spreadsheets/d/1t2i_SorVp_Lhg2wRd1dbr5ec8BMkOR1cSv29no292es/edit?gid=0#gid=0">https://docs.google.com/spreadsheets/d/1t2i_SorVp_Lhg2wRd1dbr5ec8BMkOR1cSv29no292es/edit?gid=0#gid=0</a></li>
+<li>후속: 월요일(6/15) 주간회의 후 전무님 리뷰 일정 요청 예정</li>
+</ol>
+</li>
+</ol>
+<hr>
+<h3 id="2026-06-11">2026-06-11</h3>
 <p><strong>[팀공유]</strong>
 일일보고 (김혜진) - 2026. 6. 11. (목)</p>
 <ol>
